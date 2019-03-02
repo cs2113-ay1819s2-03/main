@@ -83,22 +83,49 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindCommand.COMMAND_ALIAS:
+            return  new FindCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
+        /* added list alias*/
+        case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
 
+        /* added history alias*/
+        case HistoryCommand.COMMAND_ALIAS:
+            return new HistoryCommand();
+
         case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        /* added exit alias*/
+        case ExitCommand.COMMAND_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        /* added help alias*/
+        case HelpCommand.COMMAND_ALIAS:
+            return new HelpCommand();
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
+        /* added undo alias*/
+        case UndoCommand.COMMAND_ALIAS:
+            return new UndoCommand();
+
         case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        /* added redo alias*/
+        case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
 
         default:
