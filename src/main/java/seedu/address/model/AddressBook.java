@@ -128,18 +128,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         // TODO: refine later
     }
 
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
-    }
-
     /* command only private and repeated later */
     private void removeTagPerson(Tag tag, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());
@@ -155,6 +143,18 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void removeTag(Tag tag) {
         persons.forEach(person -> removeTagPerson(tag, person));
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddressBook // instanceof handles nulls
+                && persons.equals(((AddressBook) other).persons));
     }
 
     @Override
