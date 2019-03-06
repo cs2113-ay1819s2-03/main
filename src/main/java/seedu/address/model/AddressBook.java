@@ -128,6 +128,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         // TODO: refine later
     }
 
+    /**
+     * Removes tag from a specific person.
+     */
     private void removeTagPerson(Tag tag, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());
 
