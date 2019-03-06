@@ -2,8 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javafx.beans.InvalidationListener;
@@ -128,15 +128,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         // TODO: refine later
     }
 
-    /* command only private and repeated later */
     private void removeTagPerson(Tag tag, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());
 
-        if(!newTags.remove(tag)) {
+        if (!newTags.remove(tag)) {
             return;
         }
 
-        Person update = new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), newTags);
+        Person update = new Person(person.getName(), person.getPhone(), person.getEmail(),
+            person.getAddress(), newTags);
         setPerson(person, update);
         removePerson(update);
     }
