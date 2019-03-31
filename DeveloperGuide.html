@@ -743,33 +743,38 @@ If the <code>currentStatePointer</code> is at index <code>projectStateList.size(
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The import/export mechanism is facilitated by <code>StorageManager</code>. It saves the list of projects and the list of tasks when lists are modified by any of the available commands e.g. <code>add</code>. This feature is achieved
-using the following operations:</p>
+<p>The <code>import</code> feature reads projects from a JSON file provided as input and adds these projects on top of the current list of projects.
+The mechanism is facilitated by <code>JsonUtil</code> and is achieved using the following functions:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>StorageManager#readProjectList()</code>&#8201;&#8212;&#8201;Imports the list of projects from projectlist.json file.</p>
+<p><code>JsonUtil#readJsonFile()</code>&#8201;&#8212;&#8201;Read projects from JSON file</p>
 </li>
 <li>
-<p><code>StorageManager#saveProjectList()</code>&#8201;&#8212;&#8201;Exports the list of projects to projectlist.json file.</p>
-</li>
-<li>
-<p><code>StorageManager#readProject()</code>&#8201;&#8212;&#8201;Imports the list of tasks in a &lt;Project Name&gt;.json file.</p>
-</li>
-<li>
-<p><code>StorageManager#saveProject()</code>&#8201;&#8212;&#8201;Exports the list of tasks to a &lt;Project Name&gt;.json file.</p>
+<p><code>VersionedProjectList#addProject()</code>&#8201;&#8212;&#8201;Adds projects from JSON file to project list.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Storage</code> interface as <code>Storage#readProjectList()</code>, <code>Storage#saveProjectList()</code>, <code>Storage#readProject()</code> and <code>Storage#saveProject()</code> respectively.</p>
+<p>The <code>export</code> feature exports the current selected project (after <code>select</code> 1) or projects specified by their index to a JSON file.
+The mechanism is facilitated by <code>FileUtil</code> and <code>JsonUtil</code> and is achieved using the following functions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FileUtil#createIfMissing()</code>&#8201;&#8212;&#8201;Creates JSON file to write to if it does not exist</p>
+</li>
+<li>
+<p><code>JsonUtil#saveJsonFile()</code>&#8201;&#8212;&#8201;Writes projects to JSON file</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the import/export mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. projectList will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
+<p>Step 1. The user launches the application, <code>projectList</code> will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -778,16 +783,39 @@ using the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If this is the first time that you are launching the application, <code>StorageManager#readProjectList()</code> will populate with a sample projectList.
+If user launches the application for the first time, <code>projectList</code> will be populated with sample project list as <strong><em>./data/projectlist.json</em></strong> does not exist.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>add n/New Project &#8230;&#8203;</code> to add a new project to the projectList. The <code>add</code> command indicates that the projectList is modified and a listener calls <code>StorageManager#saveProjectList()</code> to save the modified project list to the projectlist.json file.</p>
+<p>Step 2. The user executes <code>import ./data/import.json</code> to add projects from JSON file to <code>versionedProjectList</code>.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Path to JSON file is passed to <code>JsonUtil#readJsonFile()</code> which would read projects to a temporary project list.</p>
+</li>
+<li>
+<p>Application will then loop through all projects and add them to <code>versionedProjectList</code> using <code>VersionedProjectList#addProject()</code>.</p>
+</li>
+<li>
+<p><code>updateFilteredProjectList</code> is then executed to refresh <code>ProjectListPanel</code> with all projects, including recently imported projects.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>list</code> command to list all projects and executes <code>select 1</code> to select project at index 1. The <code>select</code> command will invoke <code>StorageManager#readProject()</code> to import taskList of project selected.</p>
+<p>Step 3. The user executes <code>export i/1,2,3 o/./data/export.json</code> to export projects with index 1, 2 and 3.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Application will <code>get</code> the projects from <code>filteredProjectList</code> and add them to a new ProjectList <code>projectsToExport</code>.</p>
+</li>
+<li>
+<p><code>projectsToExport</code> is then passed to <code>JsonUtil#saveJsonFile()</code> which would write to output file specified by user.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -796,43 +824,40 @@ If this is the first time that you are launching the application, <code>StorageM
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If this is the first time that you are launching the application, <code>StorageManager#readProject()</code> will populate with a sample taskList.
+The entire project list could be found in <strong><em>./data/projectlist.json</em></strong>
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user executes <code>add n/New Task &#8230;&#8203;</code> to add a new task to the taskList. The <code>add</code> command indicates that the taskList is modified and a listener calls <code>StorageManager#saveProject()</code> to save the modified task list to the &lt;Project Name&gt;.json file.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-tracking-tasks-of-individual-project"><a class="link" href="#aspect-tracking-tasks-of-individual-project">Aspect: Tracking tasks of individual project</a></h5>
+<h5 id="aspect-tracking-projects-within-project-list-and-tasks-within-each-project"><a class="link" href="#aspect-tracking-projects-within-project-list-and-tasks-within-each-project">Aspect: Tracking projects within project list and tasks within each project</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Each project will have its own &lt;Project File&gt;.json to keep track of tasks.</p>
+<p><strong>Alternative 1:</strong> Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> to keep track of tasks.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May clutter data folder with too many project files.</p>
+<p>Cons: May clutter data folder with too many project files. Application will have to read a new project file whenever user switches project.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> All tasks of all project merged to project.json file.</p>
+<p><strong>Alternative 2 (current choice):</strong> All projects within project list and all tasks of all projects contained in <strong><em>project.json</em></strong> file.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Will not clutter data folder.</p>
 </li>
 <li>
-<p>Cons: Have to parse through entire file for tasks of specific project every time <code>StorageManager#readProject()</code> is executed.</p>
+<p>Cons: Entire project list has to be written to file every time project list is modified.</p>
 </li>
 </ul>
 </div>
@@ -2200,4 +2225,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-31 14:53:39 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-31 23:22:44 UTC</div></div></div></body></html>
