@@ -23,8 +23,7 @@
 <li><a href="#Design-Ui">2.2. UI component</a></li>
 <li><a href="#Design-Logic">2.3. Logic component</a></li>
 <li><a href="#Design-Model">2.4. Model component</a></li>
-<li><a href="#Design-Storage">2.5. Storage component</a></li>
-<li><a href="#Design-Commons">2.6. Common classes</a></li>
+<li><a href="#Design-Commons">2.5. Common classes</a></li>
 </ul>
 </li>
 <li><a href="#implementation">3. Implementation</a>
@@ -33,7 +32,7 @@
 <li><a href="#import-export-feature">3.2. Import/Export feature</a></li>
 <li><a href="#compare-task-feature">3.3. Compare Task feature</a></li>
 <li><a href="#list-tag-feature">3.4. List Tag feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
+<li><a href="#view-task-edit-history-feature">3.5. View Task Edit History Feature</a></li>
 <li><a href="#proposed-calendar-view">3.6. [Proposed] Calendar View</a></li>
 <li><a href="#logging">3.7. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
@@ -499,7 +498,7 @@ The following class plays an important role at the architecture level:</p>
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Project List Data and Project Data.</p>
 </li>
 <li>
 <p>exposes an unmodifiable <code>ObservableList&lt;Task&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
@@ -508,32 +507,6 @@ The following class plays an important role at the architecture level:</p>
 <p>does not depend on any of the other three components.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Task</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Task</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
-<div class="imageblock">
-<div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
-</div>
-<div class="title">Figure 8. Structure of the Storage Component</div>
-</div>
-<div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -550,7 +523,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.5. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.projectbook.commons</code> package.</p>
 </div>
@@ -892,6 +865,11 @@ If this is the first time that you are launching the application, <code>StorageM
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the Compare Task mechanism behaves.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/compare1.png" alt="compare1" width="900">
+</div>
+</div>
 <div class="paragraph">
 <p>Step 1. The user selects the task to compare by entering the index of the task that is shown. <code>CompareCommandParser#CompareCommand()</code> will then get the index of the task
 within <code>projectStateList</code> and passed into <code>CompareCommand#CommandResult()</code>.</p>
@@ -901,6 +879,11 @@ within <code>projectStateList</code> and passed into <code>CompareCommand#Comman
 </div>
 <div class="paragraph">
 <p>Step 3. <code>VersionedProject#compareTask()</code> will retrieve the unique <code>taskId</code> of the chosen task.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/compare2.png" alt="compare2" width="900">
+</div>
 </div>
 <div class="paragraph">
 <p>Step 4. <code>VersionedProject#compareTask()</code> will iterate through all the the tasks within each project state. The <code>taskId</code>
@@ -921,6 +904,11 @@ that is encountered, "Nothing to compare" will be showed to the user.
 </div>
 <div class="paragraph">
 <p>Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description &amp; deadline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/compare%203.png" alt="compare 3" width="800">
+</div>
 </div>
 <div class="paragraph">
 <p>Step 6. If there is a difference in any of the fields in the comparison, the difference will be showed to the user.
@@ -1016,9 +1004,82 @@ This is not the final version of implementation as it is yet to be of OOP format
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="view-task-edit-history-feature"><a class="link" href="#view-task-edit-history-feature">3.5. View Task Edit History Feature</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>View task edit history allows the user to view a list of all the edit history of a chosen task.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Stores a parallel list <code>userInputHistoryTaskId</code> along <code>userInputHistory</code>, containing the taskId of <code>edit</code> commands.</p>
+</div>
+<div class="paragraph">
+<p>The list will store <code>0</code> for all other commands.</p>
+</div>
+<div class="paragraph">
+<p>It is facilitated by <code>CommandHistory</code> and implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>CommandHistory#addHistoryTaskId()</code>&#8201;&#8212;&#8201;Adds taskId to the index that is the same as the <code>edit</code> command. Pads <code>0</code> for all other commands.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the Compare Task mechanism behaves.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Behaviour when all other commands (not <code>edit</code>) is called. <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
+However <code>userInputHistory</code> will still be updated as usual.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Behaviour when a <code>edit</code> command  is called. <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
+<code>edit</code> command is called on. Observe that positions of previous non-<code>edit</code> command will be filled with <code>0</code>. <code>userInputHistory</code> will still be updated as usual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Implement a separate list <code>userInputHistoryTaskId</code> alongside <code>userInputHistory</code> to contain taskId of task where <code>edit</code> is called on.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: A large <code>userInputHistoryTaskId</code> might result in a slower system performance during search and contains wasted space as well.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> All tasks will have their own <code>userInputHistoryTaskId</code>, keeping track of its own edit history.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: System performance will be better as you will iterate through lesser data, will have less wastage of space.</p>
+</li>
+<li>
+<p>Cons: Harder to implement, can be considered for future version in v2.0</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1058,7 +1119,7 @@ As of v1.2, this feature is still in the process of implementation.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-navigation-of-calendar-feature"><a class="link" href="#aspect-navigation-of-calendar-feature">Aspect: Navigation of calendar feature</a></h5>
 <div class="ulist">
@@ -1199,7 +1260,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 9. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 8. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -1586,31 +1647,31 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add project</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">manage multiple projects</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">insert task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">record tasks that need to be done</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">delele task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">get rid of tasks that are completed or no longer need to be done</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">change details of a particular task when changes are necessary</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">read task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">look through and be reminded of the details of a specific task</p></td>
@@ -1670,43 +1731,43 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">look through and be reminded of the details of a specific recurring subtask</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>**</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a calendar view of tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find upcoming tasks via a calendar overview</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>**</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a table view</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have an overall view to store and view any kind of structured data</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">insert tags to tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">categorize tasks based on projects/priority/etc</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">delete tags</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remove tags that is unnecessary</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update tags</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">change how I want a particular task to be categorised</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have coloured tags</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">easily view the categories of tasks at one glance</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">prioritize tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">complete them in order of importance, especially if they have roughly the same deadlines</p></td>
@@ -1718,37 +1779,37 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">make sure that my collaborators are aware of what needs to be done</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">set task deadlines</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be reminded when the task is due soon</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>**</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">show task by creation date</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be reminded not to neglect low priority tasks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>**</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a progress overview</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keep track of my productivity based on how much of a project has been completed</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a ‘help’ manual</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">learn how to use various commands to operate this product</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">advance user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have command shortcuts</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">type a command faster</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have export and import function</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">share task format easily with another user using the same format structure</p></td>
@@ -1760,34 +1821,46 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">easily find the corresponding files to work on</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find task by keywords</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">easily navigate to the specific task</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view tasks by alphabetical order</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">easily find a specific task</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view task by priority</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">know what will be due first</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>*</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undo/redo a command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remove/redo a command that I entered/removed by mistake</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>**</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view a analysis of my current progress</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a overview of how much I have completed / not completed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the previous version of my task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see what changes I have made previously</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the edit history of my task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see all the changes I have made to the task</p></td>
 </tr>
 </tbody>
 </table>
@@ -1856,15 +1929,19 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
-<div class="paragraph">
-<p>5a1. Missing information</p>
-</div>
-<div class="ulist">
-<ul>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>5a1a. ProjectManager displays error message</p>
+<p>5a1 Missing information</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a1a ProjectManager displays error message</p>
 <div class="paragraph">
 <p>Use case resumes at step 5</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -1908,15 +1985,19 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
-<div class="paragraph">
-<p>5a1. Task ID not found / Current Tag Name not found</p>
-</div>
-<div class="ulist">
-<ul>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>5a1a. ProjectManager displays error message</p>
+<p>5a1 Task ID not found / Current Tag Name not found</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a1a ProjectManager displays error message</p>
 <div class="paragraph">
 <p>Use case resumes at step 5</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -2119,4 +2200,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-29 15:37:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-31 04:10:09 UTC</div></div></div></body></html>
