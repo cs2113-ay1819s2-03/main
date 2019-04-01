@@ -32,8 +32,9 @@
 <li><a href="#list-projects-code-listprojects-code">5.2.3. List projects: <code>listprojects</code></a></li>
 <li><a href="#select-a-project-code-select-code">5.2.4. Select a project: <code>select</code></a></li>
 <li><a href="#import-a-project-list-code-import-code">5.2.5. Import a project list: <code>import</code></a></li>
-<li><a href="#analyse-progress-of-all-projects-code-analyse-code">5.2.6. Analyse progress of all projects: <code>analyse</code></a></li>
-<li><a href="#list-previously-entered-commands-code-history-code">5.2.7. List previously entered commands: <code>history</code></a></li>
+<li><a href="#export-projects-to-json-file-code-export-code">5.2.6. Export projects to JSON file: <code>export</code></a></li>
+<li><a href="#analyse-progress-of-all-projects-code-analyse-code">5.2.7. Analyse progress of all projects: <code>analyse</code></a></li>
+<li><a href="#list-previously-entered-commands-code-history-code">5.2.8. List previously entered commands: <code>history</code></a></li>
 </ul>
 </li>
 </ul>
@@ -63,7 +64,7 @@
 <li><a href="#command-summary">8. Command Summary</a></li>
 <li><a href="#appendix-a">9. Appendix A</a>
 <ul class="sectlevel2">
-<li><a href="#sample-json-file-for-code-import-code">9.1. Sample JSON file for <code>import</code></a></li>
+<li><a href="#samplejson">9.1. Sample JSON file for <code>import</code></a></li>
 </ul>
 </li>
 </ul>
@@ -373,7 +374,13 @@ If the <strong>immediate predecessor command</strong> is <code>listproject</code
 <div class="sect3">
 <h4 id="import-a-project-list-code-import-code"><a class="link" href="#import-a-project-list-code-import-code">5.2.5. Import a project list: <code>import</code></a></h4>
 <div class="paragraph">
-<p>Import additional projects and tasks to add on to current project list. Source file must be a JSON file and follow  specific format. Refer to appendix A at the end of this user guide for the format to follow.</p>
+<p>Use this function when importing a project list shared by a friend to import additional projects and tasks on top of your current project list.</p>
+</div>
+<div class="paragraph">
+<p>Source file must be a JSON file and follow  specific format. See <a href="#samplejson">Section 9.1, &#8220;Sample JSON file for <code>import</code>&#8221;</a>.</p>
+</div>
+<div class="paragraph">
+<p>This feature is recommended to be used together with <code>export</code> so that users need not manually generate a JSON file to <code>import</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -391,7 +398,7 @@ If the <strong>immediate predecessor command</strong> is <code>listproject</code
 <div class="ulist">
 <ul>
 <li>
-<p><code>import /home/user/test.json</code></p>
+<p><code>import C:\Users\Test\Desktop\import.json</code></p>
 </li>
 </ul>
 </div>
@@ -402,7 +409,7 @@ If the <strong>immediate predecessor command</strong> is <code>listproject</code
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The full path to the JSON file has to be specified unless the file is contained within the application folder. In that case, <code>import ./test.json</code> is sufficient.
+The full path to the JSON file has to be specified unless the file is contained within the application folder. If JSON file is contained in application folder, <code>import ./test.json</code> is sufficient.
 </td>
 </tr>
 </table>
@@ -412,7 +419,51 @@ The full path to the JSON file has to be specified unless the file is contained 
 </div>
 </div>
 <div class="sect3">
-<h4 id="analyse-progress-of-all-projects-code-analyse-code"><a class="link" href="#analyse-progress-of-all-projects-code-analyse-code">5.2.6. Analyse progress of all projects: <code>analyse</code></a></h4>
+<h4 id="export-projects-to-json-file-code-export-code"><a class="link" href="#export-projects-to-json-file-code-export-code">5.2.6. Export projects to JSON file: <code>export</code></a></h4>
+<div class="paragraph">
+<p>You could export projects from your NoteNote instance to easily share project tasks with your friends. Projects are exported in JSON format and could be imported by another NoteNote instance using <code>import</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>export i/INDEX o/OUTPUTPATH</code></p>
+</li>
+<li>
+<p>Alias: <code>ex</code>, i.e. <code>export</code> is equivalent to <code>ex</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To export multiple projects: <code>export i/1,2,3 o/C:\Users\Test\Desktop\export.json</code></p>
+</li>
+<li>
+<p>To export currently selected project: <code>export o/C:\Users\Test\Desktop\export.json</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Output path should be explicitly specified unless the output is to be within the application folder. If output is to be contained in application folder, the <code>export i/1,2,3 o/./test.json</code> is sufficient.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Outcome: JSON file will be created at output path specified.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="analyse-progress-of-all-projects-code-analyse-code"><a class="link" href="#analyse-progress-of-all-projects-code-analyse-code">5.2.7. Analyse progress of all projects: <code>analyse</code></a></h4>
 <div class="paragraph">
 <p>View number of completed and uncompleted tasks of each project within a specified timeframe.</p>
 </div>
@@ -441,7 +492,7 @@ The full path to the JSON file has to be specified unless the file is contained 
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-previously-entered-commands-code-history-code"><a class="link" href="#list-previously-entered-commands-code-history-code">5.2.7. List previously entered commands: <code>history</code></a></h4>
+<h4 id="list-previously-entered-commands-code-history-code"><a class="link" href="#list-previously-entered-commands-code-history-code">5.2.8. List previously entered commands: <code>history</code></a></h4>
 <div class="paragraph">
 <p>Lists all the commands that were previously entered in reverse chronological order.</p>
 </div>
@@ -1036,112 +1087,106 @@ At least 2 <code>[t/TAG]</code> parameters must be specified.
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"><strong>Help</strong></th>
-<th class="tableblock halign-left valign-top"><code>help</code></th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add n/PROJECTNAME n/TASKNAME ds/DESCRIPTION dl/DEADLINE [t/TAG]&#8230;&#8203;</code></p>
-<p class="tableblock">e.g. <code>add n/Sample Task 1 ds/This is a sample task dl/1-1-2011 t/SAMPLE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Command</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Completed</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>completed INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a new project or task</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addtag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a group tag to a task</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>analyse</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">View task completion rate</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear all tasks in project</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p>
-<p class="tableblock">e.g. <code>delete 3</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Edit</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit INDEX [n/NAME]</code></p>
-<p class="tableblock"><code>edit INDEX [n/NAME] [ds/DESCRIPTION] [dl/DEADLINE] [t/TAG]&#8230;&#8203;</code></p>
-<p class="tableblock">e.g. <code>edit 2 n/Sample Task 1 ds/This is an edited task</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find KEYWORD [MORE_KEYWORDS]</code></p>
-<p class="tableblock">e.g. <code>find Report Project</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List project</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listproject</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List tags</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listtags</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Define group tags</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>group gt/GROUPTAGNAME [t/TAG]</code></p>
-<p class="tableblock">e.g. <code>group gt/task completed t/to review t/to merge</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Select</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code></p>
-<p class="tableblock">e.g.<code>select 2</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Sort</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort CATEGORY [ascend|descend]`</p>
-<p class="tableblock">e.g. <code>sort deadline descend</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Import</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import PATH</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Export</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export FILTER</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Analyse</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>analyse DATE_1 [DATE_2]</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>View</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>view</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>History</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Task history</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>taskhistory INDEX</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Compare</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>compare INDEX</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Undo</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Redo</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clears all tasks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Exit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>compare</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compare current task with previous version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>completed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marks task as completed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definetag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define a group tag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes project or task</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edits description of project or task</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exit application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export projects to external JSON file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find for specific project or task</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Display help menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">View all commands previously entered</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Import projects from external JSON file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List all projects or tasks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listdeadline</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List tasks according to deadline</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listproject</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Go back to project list panel from task list panel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listtags</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List all unique tags and associated tasks within a project</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo modifications made to task</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select project or task to interact with</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>taskhistory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">View all modifications made to file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo modifications made to task</p></td>
 </tr>
 </tbody>
 </table>
@@ -1151,7 +1196,7 @@ At least 2 <code>[t/TAG]</code> parameters must be specified.
 <h2 id="appendix-a"><a class="link" href="#appendix-a">9. Appendix A</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="sample-json-file-for-code-import-code"><a class="link" href="#sample-json-file-for-code-import-code">9.1. Sample JSON file for <code>import</code></a></h3>
+<h3 id="samplejson"><a class="link" href="#samplejson">9.1. Sample JSON file for <code>import</code></a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code>{
@@ -1187,4 +1232,4 @@ At least 2 <code>[t/TAG]</code> parameters must be specified.
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 06:11:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 06:41:21 UTC</div></div></div></body></html>
