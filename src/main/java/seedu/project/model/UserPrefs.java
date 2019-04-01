@@ -68,7 +68,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs o = (UserPrefs) other;
 
-        return guiSettings.equals(o.guiSettings) && projectListFilePath.equals(o.projectListFilePath);
+        return guiSettings.equals(o.guiSettings)
+            && projectListFilePath.toAbsolutePath()
+            .equals(o.projectListFilePath.toAbsolutePath());
     }
 
     @Override
@@ -81,6 +83,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nProject list file location: " + projectListFilePath);
+        sb.append(Paths.get("").toAbsolutePath()
+                .relativize(projectListFilePath.toAbsolutePath()));
         return sb.toString();
     }
 

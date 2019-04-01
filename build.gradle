@@ -8,9 +8,9 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'checkstyle'
-    id 'com.github.kt3k.coveralls' version '2.4.0'
-    id 'com.github.johnrengelman.shadow' version '2.0.3'
-    id 'org.asciidoctor.convert' version '1.5.6'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
+    id 'org.asciidoctor.convert' version '1.5.8'
     id 'application'
 }
 
@@ -55,12 +55,11 @@ test {
 }
 
 dependencies {
-    String testFxVersion = '4.0.12-alpha'
+    String testFxVersion = '4.0.15-alpha'
     String jUnitVersion = '5.1.0'
 
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
-    implementation group: 'com.google.guava', name: 'guava', version: '19.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.8'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
@@ -70,15 +69,13 @@ dependencies {
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
-    testRuntimeOnly group: 'org.testfx', name: 'testfx-internal-java9', version: testFxVersion
     testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-9+181'
     testRuntimeOnly group:'org.junit.vintage', name:'junit-vintage-engine', version: jUnitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
 shadowJar {
-    archiveName = 'project.jar'
-
+    archiveName = 'NoteNote.jar'
     destinationDir = file("${buildDir}/jar/")
 }
 
@@ -171,10 +168,10 @@ task headless {
         println 'Setting headless mode properties.'
         test {
             systemProperties = [
-                'testfx.robot': 'glass',
-                'testfx.headless': 'true',
-                'prism.order': 'sw',
-                'prism.text': 't2k',
+                    'testfx.robot': 'glass',
+                    'testfx.headless': 'true',
+                    'prism.order': 'sw',
+                    'prism.text': 't2k',
             ]
         }
     }
@@ -189,22 +186,21 @@ asciidoctor {
     outputDir "${buildDir}/docs"
 
     options = [
-        template_dirs: [file("${sourceDir}/templates")],
+            template_dirs: [file("${sourceDir}/templates")],
     ]
 
     attributes = [
-        linkcss: true,
-        stylesheet: 'gh-pages.css',
-        'source-highlighter': 'coderay',
-        icons: 'font',
-        experimental: true,
-        sectlinks: true,
-        idprefix: '',  // for compatibility with GitHub preview
-        idseparator: '-',
-        'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'NoteNote',
-        'site-githuburl': 'https://github.com/CS2113-AY1819S2-T09-3/main',
-        'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
+            linkcss: true,
+            stylesheet: 'gh-pages.css',
+            'source-highlighter': 'coderay',
+            icons: 'font',
+            experimental: true,
+            sectlinks: true,
+            idprefix: '',  // for compatibility with GitHub preview
+            idseparator: '-',
+            'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
+            'site-name': 'NoteNote',
+            'site-githuburl': 'https://github.com/CS2113-AY1819S2-T09-3/main',
     ]
 
     options['template_dirs'].each {
@@ -233,5 +229,15 @@ task deployOfflineDocs(type: Copy) {
 
 deployOfflineDocs.dependsOn asciidoctor
 processResources.dependsOn deployOfflineDocs
+
+task buildJar(type: GradleBuild) {
+    tasks = ['clean', 'deployOfflineDocs', 'shadowJar']
+}
+
+compileJava {
+    options.warnings = true
+    options.deprecation = true
+    options.compilerArgs += [ "-Xlint:cast,deprecation,divzero,rawtypes,unchecked" ]
+}
 
 defaultTasks 'clean', 'headless', 'allTests', 'coverage', 'asciidoctor'
