@@ -32,10 +32,12 @@
 <li><a href="#import-export-feature">3.2. Import/Export feature</a></li>
 <li><a href="#compare-task-feature">3.3. Compare Task feature</a></li>
 <li><a href="#list-tag-feature">3.4. List Tag feature</a></li>
-<li><a href="#view-task-edit-history-feature">3.5. View Task Edit History Feature</a></li>
-<li><a href="#proposed-calendar-view">3.6. [Proposed] Calendar View</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
+<li><a href="#define-tag-feature">3.5. Define Tag feature</a></li>
+<li><a href="#add-tag-feature">3.6. Add Tag feature</a></li>
+<li><a href="#view-task-edit-history-feature">3.7. View Task Edit History Feature</a></li>
+<li><a href="#proposed-calendar-view">3.8. [Proposed] Calendar View</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -978,23 +980,11 @@ Else Step 4. will continue to run to look for another version of the chosen task
 <h3 id="list-tag-feature"><a class="link" href="#list-tag-feature">3.4. List Tag feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This is not the final version of implementation as it is yet to be of OOP format. At this moment, this section lists down what have been done.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Step 1: User starts to list all tags and their relevant tasks by <code>listtag</code>. <code>ListTagCommand</code> retrieves result of <code>Model#filteredTaskList()</code> and iterate through all the tasks and obtain a list of unique tags within each project state.</p>
 </div>
 <div class="paragraph">
-<p>Currently, the bulk of the list tag mechanism is faciliated at the <code>ListCommand</code>. It retrieves the result of <code>filteredTaskList</code> and cleans the result to get a list of unique tags. This result is stored in an <code>List&lt;Tag&gt;</code> which is then converted to a <code>Set&lt;Tag&gt;</code> to remove any duplicate entries.</p>
-</div>
-<div class="paragraph">
-<p>Through the list of unique tags, task names with the same tags are concatenated and eventually displayed to the <code>CommandResult</code></p>
+<p>Step 2: Through this list of unique tags and another iteration through all tasks, task names with the same tags are concatenated to a string and displayed to <code>CommandResult</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1002,14 +992,14 @@ This is not the final version of implementation as it is yet to be of OOP format
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> All cleaning of data and display will be handled by one file.</p>
+<p><strong>Alternative 1 (current choice):</strong> <code>getFilteredTaskList</code> to retrieve relevant information.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Not of OOP standard. Have to parse through the result of <code>getFilteredTaskList</code> to retrieve relevant information.</p>
+<p>Cons: Data from <code>getFilteredTaskList</code> have to be parsed and clean all in one file.</p>
 </li>
 </ul>
 </div>
@@ -1029,12 +1019,92 @@ This is not the final version of implementation as it is yet to be of OOP format
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-task-edit-history-feature"><a class="link" href="#view-task-edit-history-feature">3.5. View Task Edit History Feature</a></h3>
+<h3 id="define-tag-feature"><a class="link" href="#define-tag-feature">3.5. Define Tag feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>definetag</code> feature allows users to create a group tag and add multiple child tags into it. It should be used in conjuction with <code>addtag</code> feature.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User creates new group tag and its associated children tag with <code>definetag</code>. <code>DefineTagCommandParser</code> create a new <code>GroupTag</code> object that contains the group tag’s name and its associated tags and return them to <code>DefineTagCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2: <code>DefineTagCommand</code> checks if GroupTag is unique via <code>Model#hasGroupTag</code> and adds the object to the model with <code>Model#addGroupTag</code> and <code>Model#commitProjectList</code> if it is.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Results of define tag is not stored.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Created group tag is lost once the NoteNote instance is restarted.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Storing results of define tag.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Created group tag can be used between all instances of NoteNote.</p>
+</li>
+<li>
+<p>Cons: Harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-tag-feature"><a class="link" href="#add-tag-feature">3.6. Add Tag feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>addtag</code> feature allows users to apply existing group tag to multiple tasks. It should be used in conjuction with <code>definetag</code> feature.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User selects task index and its favoured group tag with <code>addtag</code>. <code>AddTagCommandParser</code> parses the arguements and return them <code>AddTagCommand#AddTagCommand()</code></p>
+</div>
+<div class="paragraph">
+<p>Step 2: <code>AddTagCommand</code> gets a updated task list with <code>Model#getFilteredTaskList()</code> and iterate to add tags in the <code>GroupTag</code> object to chosen task.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Results is stored.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-task-edit-history-feature"><a class="link" href="#view-task-edit-history-feature">3.7. View Task Edit History Feature</a></h3>
 <div class="paragraph">
 <p>View task edit history allows the user to view a list of all the edit history of a chosen task.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Stores a parallel list <code>userInputHistoryTaskId</code> along <code>userInputHistory</code>, containing the taskId of <code>edit</code> commands.</p>
 </div>
@@ -1074,7 +1144,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1108,7 +1178,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-calendar-view"><a class="link" href="#proposed-calendar-view">3.6. [Proposed] Calendar View</a></h3>
+<h3 id="proposed-calendar-view"><a class="link" href="#proposed-calendar-view">3.8. [Proposed] Calendar View</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1122,7 +1192,7 @@ As of v1.2, this feature is still in the process of implementation.
 </table>
 </div>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.6.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.8.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The calendar leverages on the Google calendar API to enable this feature. A sample usage, along with the behaviour of the calendar model at each step, is given below:</p>
 </div>
@@ -1144,7 +1214,7 @@ As of v1.2, this feature is still in the process of implementation.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-navigation-of-calendar-feature"><a class="link" href="#aspect-navigation-of-calendar-feature">Aspect: Navigation of calendar feature</a></h5>
 <div class="ulist">
@@ -1181,14 +1251,14 @@ As of v1.2, this feature is still in the process of implementation.
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1219,7 +1289,7 @@ As of v1.2, this feature is still in the process of implementation.
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2225,4 +2295,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 05:30:24 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 06:29:16 UTC</div></div></div></body></html>
