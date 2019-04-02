@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import seedu.project.commons.core.Messages;
 import seedu.project.commons.core.index.Index;
 import seedu.project.logic.CommandHistory;
+import seedu.project.logic.commands.exceptions.CommandException;
 import seedu.project.model.Model;
 import seedu.project.model.task.Task;
 
@@ -36,13 +38,17 @@ public class TaskHistoryCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(history);
 
+        List<Task> lastShownList = model.getFilteredTaskList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
 
         ArrayList<String> previousCommands = new ArrayList<>(history.getHistory());
         ArrayList<String> previousCommandsTaskId = new ArrayList<>(history.getHistoryTaskId());
-        List<Task> lastShownList = model.getFilteredTaskList();
 
         //        if (targetIndex.getZeroBased() >= lastShownList.size()) {
         //        throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

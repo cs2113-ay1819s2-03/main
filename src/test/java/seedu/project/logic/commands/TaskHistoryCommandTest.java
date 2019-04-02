@@ -33,18 +33,20 @@ public class TaskHistoryCommandTest {
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        String taskId = Integer.toString(model.getFilteredTaskList().get(0).getTaskId());
+       // String taskId = Integer.toString(model.getFilteredTaskList().get(0).getTaskId());
 
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         Task editedTask1 = new TaskBuilder(taskInFilteredList).withName(VALID_NAME_CP2106).build();
         Task editedTask2 = new TaskBuilder(taskInFilteredList).withName(VALID_NAME_CS2101).build();
         TaskHistoryCommand taskHistoryCommand = new TaskHistoryCommand(INDEX_FIRST_TASK);
+        String taskId = Integer.toString(editedTask2.getTaskId());
+
 
         String tempCurrent1 = "edit 1 n/Orbital Project";
         String tempCurrent2 = "edit 1 n/Milestone";
         ArrayList<String> commandList = new ArrayList<>();
-        commandList.add(tempCurrent1);
         commandList.add(tempCurrent2);
+        commandList.add(tempCurrent1);
         commandHistory.add("select 1");
         commandHistory.addHistoryTaskId(taskId);
         commandHistory.add(tempCurrent1);
@@ -52,7 +54,7 @@ public class TaskHistoryCommandTest {
         commandHistory.add(tempCurrent2);
 
 
-        String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased(), commandList);
+        String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased(), String.join("\n", commandList));
 
         Model expectedModel = new ModelManager(
                 new ProjectList(model.getProjectList()), new Project(model.getProject()), new UserPrefs());
@@ -101,5 +103,59 @@ public class TaskHistoryCommandTest {
         //tempString.get(0), tempString.get(1));
 
         assertCommandSuccess(taskHistoryCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexWithNoEdit() {
+
+        model.setProject(model.getFilteredProjectList().get(0));
+        model.setSelectedProject(model.getFilteredProjectList().get(0));
+
+        TaskHistoryCommand taskHistoryCommand = new TaskHistoryCommand(INDEX_FIRST_TASK);
+
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+
+        // String taskId = Integer.toString(model.getFilteredTaskList().get(0).getTaskId());
+
+        //String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased(), String.join("\n", commandList));
+
+        Model expectedModel = new ModelManager(
+                new ProjectList(model.getProjectList()), new Project(model.getProject()), new UserPrefs());
+
+        expectedModel.setProject(model.getFilteredProjectList().get(0));
+        expectedModel.setSelectedProject(model.getFilteredProjectList().get(0));
+        model.setProject(model.getFilteredProjectList().get(0));
+        model.setSelectedProject(model.getFilteredProjectList().get(0));
+
+        LogicManager.setState(true);
+
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.commitProject();
+        model.setProject(model.getSelectedProject(),
+                (Project) model.getProject()); //sync project list
+        model.commitProjectList();
+
+        expectedModel.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        expectedModel.commitProject();
+        expectedModel.setProject(expectedModel.getSelectedProject(),
+                (Project) expectedModel.getProject()); //sync project list
+        expectedModel.commitProjectList();
+
+        assertCommandSuccess(taskHistoryCommand, model, commandHistory, TaskHistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndex() {
+
+        model.setProject(model.getFilteredProjectList().get(0));
+        model.setSelectedProject(model.getFilteredProjectList().get(0));
+
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
+
+        TaskHistoryCommand taskHistoryCommand = new TaskHistoryCommand(outOfBoundsIndex);
+
+        assertCommandFailure(taskHistoryCommand, model, commandHistory, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 }
