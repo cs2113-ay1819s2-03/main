@@ -20,7 +20,7 @@ import seedu.project.model.task.Task;
 import seedu.project.testutil.TaskBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
+
 public class TaskHistoryCommandTest {
     private Model model = new ModelManager(getTypicalProjectList(), new Project(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -78,7 +78,6 @@ public class TaskHistoryCommandTest {
         expectedModel.setTask(expectedModel.getFilteredTaskList().get(0), editedTask2);
         expectedModel.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         expectedModel.commitProject();
-
         expectedModel.setProject(expectedModel.getSelectedProject(),
                 (Project) expectedModel.getProject()); //sync project list
         expectedModel.commitProjectList();
