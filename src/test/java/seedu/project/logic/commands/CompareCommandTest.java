@@ -8,6 +8,8 @@ import static seedu.project.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.project.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.project.testutil.TypicalTasks.getTypicalProjectList;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import seedu.project.commons.core.Messages;
@@ -21,8 +23,6 @@ import seedu.project.model.UserPrefs;
 import seedu.project.model.project.Project;
 import seedu.project.model.task.Task;
 import seedu.project.testutil.TaskBuilder;
-
-import java.util.List;
 
 public class CompareCommandTest {
     private Model model = new ModelManager(getTypicalProjectList(), new Project(), new UserPrefs());
@@ -40,8 +40,10 @@ public class CompareCommandTest {
         Task editedTask = new TaskBuilder(taskInFilteredList).withName(VALID_NAME_CP2106).build();
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_TASK);
 
-        String tempCurrent = "Name: Orbital Project | Description: find teammates for group discussion on presentation | Deadline: 1-1-2011";
-        String tempCompared = "Name: Attend tutorial | Description: attend tutorial at utown classroom | Deadline: 1-1-2011";
+        String tempCurrent = "Name: Orbital Project | Description: find teammates for group"
+                + " discussion on presentation | Deadline: 1-1-2011";
+        String tempCompared = "Name: Attend tutorial | Description: attend tutorial at utown "
+                + "classroom | Deadline: 1-1-2011";
         String expectedMessage = String.format(compareCommand.MESSAGE_COMPARE_TASK_SUCCESS, tempCurrent, tempCompared);
 
         Model expectedModel = new ModelManager(
@@ -74,7 +76,7 @@ public class CompareCommandTest {
         expectedModel.commitProject();
 
         //String expectedMessage = String.format(compareCommand.MESSAGE_COMPARE_TASK_SUCCESS,
-                //tempString.get(0), tempString.get(1));
+        // tempString.get(0), tempString.get(1));
 
         assertCommandSuccess(compareCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -128,6 +130,7 @@ public class CompareCommandTest {
         List<String> tempString = expectedModel.compareTask(expectedModel.getFilteredTaskList().get(0));
         expectedModel.commitProject();
 
-        assertCommandSuccess(compareCommand, model, commandHistory, compareCommand.MESSAGE_COMPARE_TASK_FAILURE, expectedModel);
+        assertCommandSuccess(compareCommand, model, commandHistory,
+                compareCommand.MESSAGE_COMPARE_TASK_FAILURE, expectedModel);
     }
 }

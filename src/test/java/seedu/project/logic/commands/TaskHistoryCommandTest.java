@@ -1,9 +1,15 @@
 package seedu.project.logic.commands;
 
-import static seedu.project.logic.commands.CommandTestUtil.*;
+import static seedu.project.logic.commands.CommandTestUtil.VALID_NAME_CP2106;
+import static seedu.project.logic.commands.CommandTestUtil.VALID_NAME_CS2101;
+import static seedu.project.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.project.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.project.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.project.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.project.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.project.testutil.TypicalTasks.getTypicalProjectList;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -19,8 +25,6 @@ import seedu.project.model.project.Project;
 import seedu.project.model.task.Task;
 import seedu.project.testutil.TaskBuilder;
 
-import java.util.ArrayList;
-
 public class TaskHistoryCommandTest {
     private Model model = new ModelManager(getTypicalProjectList(), new Project(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -33,7 +37,7 @@ public class TaskHistoryCommandTest {
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-       // String taskId = Integer.toString(model.getFilteredTaskList().get(0).getTaskId());
+        // String taskId = Integer.toString(model.getFilteredTaskList().get(0).getTaskId());
 
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         Task editedTask1 = new TaskBuilder(taskInFilteredList).withName(VALID_NAME_CP2106).build();
@@ -54,7 +58,8 @@ public class TaskHistoryCommandTest {
         commandHistory.add(tempCurrent2);
 
 
-        String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased(), String.join("\n", commandList));
+        String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS,
+                INDEX_FIRST_TASK.getOneBased(), String.join("\n", commandList));
 
         Model expectedModel = new ModelManager(
                 new ProjectList(model.getProjectList()), new Project(model.getProject()), new UserPrefs());
@@ -116,7 +121,8 @@ public class TaskHistoryCommandTest {
 
         // String taskId = Integer.toString(model.getFilteredTaskList().get(0).getTaskId());
 
-        //String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased(), String.join("\n", commandList));
+        //String expectedMessage = String.format(TaskHistoryCommand.MESSAGE_SUCCESS,
+        // INDEX_FIRST_TASK.getOneBased(), String.join("\n", commandList));
 
         Model expectedModel = new ModelManager(
                 new ProjectList(model.getProjectList()), new Project(model.getProject()), new UserPrefs());
@@ -140,7 +146,8 @@ public class TaskHistoryCommandTest {
                 (Project) expectedModel.getProject()); //sync project list
         expectedModel.commitProjectList();
 
-        assertCommandSuccess(taskHistoryCommand, model, commandHistory, TaskHistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
+        assertCommandSuccess(taskHistoryCommand, model, commandHistory,
+                TaskHistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
     }
 
     @Test
