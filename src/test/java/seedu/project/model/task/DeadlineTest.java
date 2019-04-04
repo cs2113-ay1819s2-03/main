@@ -31,7 +31,6 @@ public class DeadlineTest {
 
         // valid deadlines
         assertTrue(Deadline.isValidDeadline("01-01-2019"));
-        assertTrue(Deadline.isValidDeadline("01-01-2019"));
-        assertTrue(Deadline.isValidDeadline("01-01-2019"));
+        assertTrue(Deadline.isValidDeadline("19-12-2019"));
     }
 }
