@@ -13,6 +13,6 @@ public class Messages {
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_RETURN_TO_PROJECT_LEVEL = "Return to project level before executing $s "
             + "using listproject";
-    public static final String MESSAGE_GO_TO_TASK_LEVEL = "Select project before executing $s";
+    public static final String MESSAGE_GO_TO_TASK_LEVEL = "Select project before executing %1$s";
 
 }
