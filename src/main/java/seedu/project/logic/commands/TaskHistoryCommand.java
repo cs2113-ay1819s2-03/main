@@ -53,7 +53,6 @@ public class TaskHistoryCommand extends Command {
             //        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             //        throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             //}
-          
             if (previousCommands.isEmpty()) {
                 return new CommandResult(MESSAGE_NO_HISTORY);
             }
