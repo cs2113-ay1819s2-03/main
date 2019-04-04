@@ -9,6 +9,7 @@ import java.util.List;
 import seedu.project.commons.core.Messages;
 import seedu.project.commons.core.index.Index;
 import seedu.project.logic.CommandHistory;
+import seedu.project.logic.LogicManager;
 import seedu.project.logic.commands.exceptions.CommandException;
 import seedu.project.model.Model;
 import seedu.project.model.task.Task;
@@ -41,42 +42,46 @@ public class TaskHistoryCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(history);
 
-        List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+        if (!LogicManager.getState()) {
+            throw new CommandException(String.format(Messages.MESSAGE_GO_TO_TASK_LEVEL, COMMAND_WORD));
 
-        ArrayList<String> previousCommands = new ArrayList<>(history.getHistory());
-        ArrayList<String> previousCommandsTaskId = new ArrayList<>(history.getHistoryTaskId());
+        } else {
+            ArrayList<String> previousCommands = new ArrayList<>(history.getHistory());
+            ArrayList<String> previousCommandsTaskId = new ArrayList<>(history.getHistoryTaskId());
+            List<Task> lastShownList = model.getFilteredTaskList();
+            //        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            //        throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            //}
 
-        //        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-        //        throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        //}
-
-        if (previousCommands.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_HISTORY);
-        }
-
-        Task chosenTask = lastShownList.get(targetIndex.getZeroBased());
-
-        String taskId = Integer.toString(chosenTask.getTaskId());
-        int commandTaskIdSize = previousCommandsTaskId.size();
-        ArrayList<String> commandList = new ArrayList<>();
-
-        for (int i = 0; i < commandTaskIdSize; i++) {
-            if (previousCommandsTaskId.get(i).equals(taskId)) {
-                commandList.add(previousCommands.get(i));
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
-        }
 
-        if (commandList.size() == 0) {
-            return new CommandResult(String.format(MESSAGE_NO_HISTORY));
-        }
+            if (previousCommands.isEmpty()) {
+                return new CommandResult(MESSAGE_NO_HISTORY);
+            }
 
-        Collections.reverse(commandList);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
-                String.join("\n", commandList)));
+            Task chosenTask = lastShownList.get(targetIndex.getZeroBased());
+
+            String taskId = Integer.toString(chosenTask.getTaskId());
+            int commandTaskIdSize = previousCommandsTaskId.size();
+            ArrayList<String> commandList = new ArrayList<>();
+
+            for (int i = 0; i < commandTaskIdSize; i++) {
+                if (previousCommandsTaskId.get(i).equals(taskId)) {
+                    commandList.add(previousCommands.get(i));
+                }
+            }
+
+            if (commandList.size() == 0) {
+                return new CommandResult(String.format(MESSAGE_NO_HISTORY));
+            }
+
+            Collections.reverse(commandList);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
+                    String.join("\n", commandList)));
+        }
     }
 
 }

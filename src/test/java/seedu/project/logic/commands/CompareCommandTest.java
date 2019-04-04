@@ -41,9 +41,9 @@ public class CompareCommandTest {
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_TASK);
 
         String tempCurrent = "Name: Orbital Project | Description: find teammates for group"
-                + " discussion on presentation | Deadline: 1-1-2011";
+                + " discussion on presentation | Deadline: 01-01-2019";
         String tempCompared = "Name: Attend tutorial | Description: attend tutorial at utown "
-                + "classroom | Deadline: 1-1-2011";
+                + "classroom | Deadline: 01-01-2019";
         String expectedMessage = String.format(compareCommand.MESSAGE_COMPARE_TASK_SUCCESS, tempCurrent, tempCompared);
 
         Model expectedModel = new ModelManager(
