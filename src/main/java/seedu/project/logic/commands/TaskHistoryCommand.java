@@ -42,7 +42,6 @@ public class TaskHistoryCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(history);
 
-
         if (!LogicManager.getState()) {
             throw new CommandException(String.format(Messages.MESSAGE_GO_TO_TASK_LEVEL, COMMAND_WORD));
 
@@ -50,14 +49,11 @@ public class TaskHistoryCommand extends Command {
             ArrayList<String> previousCommands = new ArrayList<>(history.getHistory());
             ArrayList<String> previousCommandsTaskId = new ArrayList<>(history.getHistoryTaskId());
             List<Task> lastShownList = model.getFilteredTaskList();
+
             //        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             //        throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             //}
-
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
+          
             if (previousCommands.isEmpty()) {
                 return new CommandResult(MESSAGE_NO_HISTORY);
             }
