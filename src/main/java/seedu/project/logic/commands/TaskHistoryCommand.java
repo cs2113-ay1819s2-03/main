@@ -42,7 +42,6 @@ public class TaskHistoryCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(history);
 
-
         if (!LogicManager.getState()) {
             throw new CommandException(String.format(Messages.MESSAGE_GO_TO_TASK_LEVEL, COMMAND_WORD));
 
