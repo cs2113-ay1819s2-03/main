@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.project.commons.core.index.Index;
 import seedu.project.commons.core.Messages;
+import seedu.project.commons.core.index.Index;
 import seedu.project.logic.CommandHistory;
 import seedu.project.logic.LogicManager;
 import seedu.project.logic.commands.exceptions.CommandException;

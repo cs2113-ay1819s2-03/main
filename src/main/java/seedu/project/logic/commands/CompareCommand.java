@@ -57,7 +57,8 @@ public class CompareCommand extends Command {
             List<String> tempString = model.compareTask(taskToCompare);;
             model.commitProject();
             if (tempString != null) {
-                return new CommandResult(String.format(MESSAGE_COMPARE_TASK_SUCCESS, tempString.get(0), tempString.get(1)));
+                return new CommandResult(String.format(MESSAGE_COMPARE_TASK_SUCCESS,
+                        tempString.get(0), tempString.get(1)));
             } else {
                 return new CommandResult(MESSAGE_COMPARE_TASK_FAILURE);
             }
