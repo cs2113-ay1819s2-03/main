@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Yow Ren Jie - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">NoteNote</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S2-T09-3/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Yow Ren Jie - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-notenotex"><a class="link" href="#project-notenotex">PROJECT: NoteNotex</a></h2>
+<h2 id="project-notenote"><a class="link" href="#project-notenote">PROJECT: NoteNote</a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -10,9 +10,13 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>NoteNote is a desktop project application used for managing multiple projects and tasks. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-== Summary of contributions</p>
+<p>NoteNote is a desktop project application allowing you to manage multiple projects and tasks. You will interact with it through a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -20,7 +24,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to view a command history of a chosen task with the command <code>taskhistory</code>. The command history will include commands that have a direct impact on the task (e.g. edit / completed / grouptag / delete)</p>
+<p>What it does: allows you to view a command history of a chosen task with the command <code>taskhistory</code>. The command history will include commands that have a direct impact on the task (e.g. <code>edit</code> / <code>completed</code> / <code>addtag</code> / <code>delete</code>)</p>
 </li>
 <li>
 <p>Justification: Current implementation will only allow you to view the command history of every command (valid &amp; invalid) that has been entered.
@@ -40,14 +44,21 @@ to the command of the same index in the command history.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to view a direct comparison of a chosen task against its previous version before the edit with the command <code>compare</code></p>
+<p>What it does: allows you to view a direct comparison of a chosen task against its previous version before the edit with the command <code>compare</code></p>
 </li>
 <li>
-<p>Justification: To allow easy referencing for a chosen task in a neater method as this feature compares the differences and will only show you the result of the field (Name / Description / Deadline) that was changed, instead of all the field.</p>
+<p>Justification: To allow easy referencing for a chosen task in a neater method as this feature compares the differences and will only show you the result of the field (Name / Description / Deadline) that was changed, instead of all the fields.</p>
 </li>
 <li>
-<p>Highlights: Current undo feature is implemented as general undo for all commands.
-This compare feature serves as a base for a future feature which allows undo for a specific task where a user is able to undo to the version that is shown when <code>compare</code> executes.</p>
+<p>Highlights: Current <code>undo</code> feature is implemented as general undo for all commands.
+This <code>compare</code> feature serves as a base for a future feature which allows <code>undo</code> for a specific task.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>You will be able to <code>undo</code> to the version that is shown when <code>compare</code> executes.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -64,7 +75,7 @@ This compare feature serves as a base for a future feature which allows undo for
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.2</code> - <code>v1.3</code> (2 releases) on GitHub</p>
+<p>Managed releases <code>v1.2</code> - <code>v1.4</code> (3 releases) on GitHub</p>
 </li>
 <li>
 <p>Ensured deliverable&#8217;s are met.</p>
@@ -115,7 +126,11 @@ This compare feature serves as a base for a future feature which allows undo for
 <div class="ulist">
 <ul>
 <li>
-<p>Reported bugs &amp; solutions to team (examples:  <a href="https://github.com/CS2113-AY1819S2-T09-3/main/issues/97">#97</a>, <a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/128">#128</a>, <a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/131">#131</a>)</p>
+<p>Reported bugs &amp; solutions to team
+(examples:  <a href="https://github.com/CS2113-AY1819S2-T09-3/main/issues/97">#97</a>,
+<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/128">#128</a>,
+<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/131">#131</a>,
+<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/141">#141</a>)</p>
 </li>
 </ul>
 </div>
@@ -390,7 +405,7 @@ Else Step 4. will continue to run to look for another version of the chosen task
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p>Stores a parallel list <code>userInputHistoryTaskId</code> along <code>userInputHistory</code>, containing the taskId of <code>edit</code> commands.</p>
+<p>Stores a parallel list <code>userInputHistoryTaskId</code> along <code>userInputHistory</code>, containing the taskId of <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> commands.</p>
 </div>
 <div class="paragraph">
 <p>The list will store <code>0</code> for all other commands.</p>
@@ -462,4 +477,4 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-05 05:44:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-05 09:03:54 UTC</div></div></div></body></html>
