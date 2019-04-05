@@ -835,12 +835,23 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-tracking-projects-within-project-list-and-tasks-within-each-project"><a class="link" href="#aspect-tracking-projects-within-project-list-and-tasks-within-each-project">Aspect: Tracking projects within project list and tasks within each project</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1:</strong> Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> to keep track of tasks.</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Consideration</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternative one</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternative two</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method of tracking multiple projects within project list and multiple tasks within each project</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> to keep track of tasks.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -850,10 +861,13 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 <p>Cons: May clutter data folder with too many project files. Application will have to read a new project file whenever user switches project.</p>
 </li>
 </ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Current Choice</strong></p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2 (current choice):</strong> All projects within project list and all tasks of all projects contained in <strong><em>project.json</em></strong> file.</p>
+<div class="paragraph">
+<p>All projects within project list and all tasks of all projects contained in <strong><em>project.json</em></strong> file.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -864,10 +878,12 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p>This option was chosen as it facilitates importing and exporting projects to one file only.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -2325,4 +2341,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-04 14:44:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-05 05:43:35 UTC</div></div></div></body></html>
