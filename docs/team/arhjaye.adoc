@@ -4,6 +4,7 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: NoteNote
+
 ---
 
 == Overview
@@ -14,6 +15,7 @@ NoteNote is a desktop project application allowing you to manage multiple projec
 
 * *Major enhancement*: added *the ability to view command history for each individual task*
 ** What it does: allows you to view a command history of a chosen task with the command `taskhistory`. The command history will include commands that have a direct impact on the task (e.g. `edit` / `completed` / `addtag` / `delete`)
+
 ** Justification: Current implementation will only allow you to view the command history of every command (valid & invalid) that has been entered.
 But when handling multiple large projects, a user is bound to have numerous edits for the many task that is there.
 In this case the likelihood of a user forgetting / executing a wrong command is very probable. Thus, this feature allows a user
@@ -34,6 +36,7 @@ This `compare` feature serves as a base for a future feature which allows `undo`
 
 ** Project management:
 *** Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
+
 *** Ensured deliverable's are met.
 ** Enhancements to existing features:
 *** Fixed existing tests cases to be based on new model infrastructure. (Pull requests https://github.com/CS2113-AY1819S2-T09-3/main/pull/107[#107])
