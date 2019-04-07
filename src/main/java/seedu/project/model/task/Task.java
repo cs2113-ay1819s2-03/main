@@ -54,7 +54,6 @@ public class Task implements Comparable<Task> {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             result = dateFormat.parse(s);
-            System.out.println("result is: " + result + "\n");
 
         } catch (ParseException e) {
             e.printStackTrace();
