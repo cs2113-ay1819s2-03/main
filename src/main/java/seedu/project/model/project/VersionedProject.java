@@ -111,10 +111,11 @@ public class VersionedProject extends Project {
         int targetTaskId = target1.getTaskId();
         int movingStatePointer = currentStatePointer;
         movingStatePointer--;
-
         while (movingStatePointer >= 0) {
             int taskIndex = projectStateList.get(movingStatePointer).getIndex(targetTaskId);
+
             if (taskIndex != -1) {
+
                 if (isThereDiff(target1, projectStateList.get(movingStatePointer).getTaskList()
                         .get(taskIndex))) {
 

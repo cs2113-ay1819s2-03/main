@@ -38,12 +38,11 @@ public class CompareCommandTest {
 
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         Task editedTask = new TaskBuilder(taskInFilteredList).withName(VALID_NAME_CP2106).build();
+        editedTask.updateTaskId(taskInFilteredList.getTaskId());
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_TASK);
 
-        String tempCurrent = "Name: Orbital Project | Description: find teammates for group"
-                + " discussion on presentation | Deadline: 01-01-2019";
-        String tempCompared = "Name: Attend tutorial | Description: attend tutorial at utown "
-                + "classroom | Deadline: 01-01-2019";
+        String tempCurrent = "Name: Orbital Project";
+        String tempCompared = "Name: Group meeting";
         String expectedMessage = String.format(compareCommand.MESSAGE_COMPARE_TASK_SUCCESS, tempCurrent, tempCompared);
 
         Model expectedModel = new ModelManager(
@@ -56,7 +55,7 @@ public class CompareCommandTest {
 
         LogicManager.setState(true);
 
-        expectedModel.setTask(model.getFilteredTaskList().get(0), editedTask);
+        expectedModel.setTask(expectedModel.getFilteredTaskList().get(0), editedTask);
         expectedModel.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         expectedModel.commitProject();
 
