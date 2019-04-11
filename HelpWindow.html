@@ -31,13 +31,11 @@
 <li><a href="#editing-a-project-code-edit-code">5.2.2. Editing a project: <code>edit</code></a></li>
 <li><a href="#list-projects-code-listproject-code">5.2.3. List projects: <code>listproject</code></a></li>
 <li><a href="#select-a-project-code-select-code">5.2.4. Select a project: <code>select</code></a></li>
-<li><a href="#list-all-tags-code-listtag-code">5.2.5. List all tags: <code>listtag</code></a></li>
-<li><a href="#defining-a-group-tag-code-definetag-code">5.2.6. Defining a group tag: <code>definetag</code></a></li>
-<li><a href="#adding-a-group-tag-code-addtag-code">5.2.7. Adding a group tag: <code>addtag</code></a></li>
-<li><a href="#import-a-project-list-code-import-code">5.2.8. Import a project list: <code>import</code></a></li>
-<li><a href="#export-projects-to-json-file-code-export-code">5.2.9. Export projects to JSON file: <code>export</code></a></li>
-<li><a href="#analyse-progress-of-all-projects-code-analyse-code">5.2.10. Analyse progress of all projects: <code>analyse</code></a></li>
-<li><a href="#list-previously-entered-commands-code-history-code">5.2.11. List previously entered commands: <code>history</code></a></li>
+<li><a href="#defining-a-group-tag-code-definetag-code">5.2.5. Defining a group tag: <code>definetag</code></a></li>
+<li><a href="#import-a-project-list-code-import-code">5.2.6. Import a project list: <code>import</code></a></li>
+<li><a href="#export-projects-to-json-file-code-export-code">5.2.7. Export projects to JSON file: <code>export</code></a></li>
+<li><a href="#analyse-progress-of-all-projects-code-analyse-code">5.2.8. Analyse progress of all projects: <code>analyse</code></a></li>
+<li><a href="#list-previously-entered-commands-code-history-code">5.2.9. List previously entered commands: <code>history</code></a></li>
 </ul>
 </li>
 </ul>
@@ -48,18 +46,20 @@
 <li><a href="#task-level-commands">6.2. Task Level Commands</a>
 <ul class="sectlevel3">
 <li><a href="#adding-a-task-code-add-code">6.2.1. Adding a task: <code>add</code></a></li>
-<li><a href="#clearing-all-task-code-clear-code">6.2.2. Clearing all task: <code>clear</code></a></li>
-<li><a href="#editing-a-task-code-edit-code">6.2.3. Editing a task: <code>edit</code></a></li>
-<li><a href="#locating-tasks-by-name-code-find-code">6.2.4. Locating tasks by name: <code>find</code></a></li>
-<li><a href="#listing-all-tasks-code-list-code">6.2.5. Listing all tasks: <code>list</code></a></li>
-<li><a href="#deleting-a-task-code-delete-code">6.2.6. Deleting a task: <code>delete</code></a></li>
-<li><a href="#completing-a-task-code-completed-code">6.2.7. Completing a task: <code>completed</code></a></li>
-<li><a href="#selecting-a-task-code-select-code">6.2.8. Selecting a task: <code>select</code></a></li>
-<li><a href="#sorting-tasks-code-listdeadline-code">6.2.9. Sorting tasks: <code>listDeadline</code></a></li>
-<li><a href="#undo-previous-command-code-undo-code">6.2.10. Undo previous command : <code>undo</code></a></li>
-<li><a href="#redo-previously-undone-command-code-redo-code">6.2.11. Redo previously undone command : <code>redo</code></a></li>
-<li><a href="#list-previously-entered-commands-for-a-chosen-task-code-taskhistory-code">6.2.12. List previously entered commands for a chosen task: <code>taskhistory</code></a></li>
-<li><a href="#compares-a-task-with-its-previous-version-code-compare-code">6.2.13. Compares a task with its previous version: <code>compare</code></a></li>
+<li><a href="#adding-a-group-tag-code-addtag-code">6.2.2. Adding a group tag: <code>addtag</code></a></li>
+<li><a href="#clearing-all-task-code-clear-code">6.2.3. Clearing all task: <code>clear</code></a></li>
+<li><a href="#editing-a-task-code-edit-code">6.2.4. Editing a task: <code>edit</code></a></li>
+<li><a href="#locating-tasks-by-name-code-find-code">6.2.5. Locating tasks by name: <code>find</code></a></li>
+<li><a href="#listing-all-tasks-code-list-code">6.2.6. Listing all tasks: <code>list</code></a></li>
+<li><a href="#list-all-tags-code-listtag-code">6.2.7. List all tags: <code>listtag</code></a></li>
+<li><a href="#deleting-a-task-code-delete-code">6.2.8. Deleting a task: <code>delete</code></a></li>
+<li><a href="#completing-a-task-code-completed-code">6.2.9. Completing a task: <code>completed</code></a></li>
+<li><a href="#selecting-a-task-code-select-code">6.2.10. Selecting a task: <code>select</code></a></li>
+<li><a href="#sorting-tasks-code-listdeadline-code">6.2.11. Sorting tasks: <code>listDeadline</code></a></li>
+<li><a href="#undo-previous-command-code-undo-code">6.2.12. Undo previous command : <code>undo</code></a></li>
+<li><a href="#redo-previously-undone-command-code-redo-code">6.2.13. Redo previously undone command : <code>redo</code></a></li>
+<li><a href="#list-previously-entered-commands-for-a-chosen-task-code-taskhistory-code">6.2.14. List previously entered commands for a chosen task: <code>taskhistory</code></a></li>
+<li><a href="#compares-a-task-with-its-previous-version-code-compare-code">6.2.15. Compares a task with its previous version: <code>compare</code></a></li>
 </ul>
 </li>
 </ul>
@@ -376,26 +376,7 @@ If the <strong>immediate predecessor command</strong> is <code>listproject</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-all-tags-code-listtag-code"><a class="link" href="#list-all-tags-code-listtag-code">5.2.5. List all tags: <code>listtag</code></a></h4>
-<div class="paragraph">
-<p>List all unique tags and associated tasks within a project</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Format: <code>listtag</code></p>
-</li>
-<li>
-<p>Alias: <code>lt</code>, i.e. <code>listtag</code> is equivalent to <code>lt</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Outcome: Result Box (Panel B) will will display all unique tags and associated tasks within a project.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="defining-a-group-tag-code-definetag-code"><a class="link" href="#defining-a-group-tag-code-definetag-code">5.2.6. Defining a group tag: <code>definetag</code></a></h4>
+<h4 id="defining-a-group-tag-code-definetag-code"><a class="link" href="#defining-a-group-tag-code-definetag-code">5.2.5. Defining a group tag: <code>definetag</code></a></h4>
 <div class="paragraph">
 <p>Define a group tag when you want to add multiple identical tags to multiple tasks easily. They can be carried out at both project and task level.
 However, group tag created exists for the entire NoteNote instance and will be lost once the user exits.</p>
@@ -452,72 +433,7 @@ However, group tag created exists for the entire NoteNote instance and will be l
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-group-tag-code-addtag-code"><a class="link" href="#adding-a-group-tag-code-addtag-code">5.2.7. Adding a group tag: <code>addtag</code></a></h4>
-<div class="paragraph">
-<p>Add a previously defined group tag to a task.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Format: <code>addtag INDEX gt/GROUPTAG</code></p>
-</li>
-<li>
-<p>Alias: <code>at</code>, i.e. <code>addtag</code> is equivalent to <code>at</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addtag 1 gt/Consultation</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Outcome: Task Box (Panel D) will show the updated task with newly added tags.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Tags defined under the group tag will be visible under the task instead of the group tag itself.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>In cases where the user input pre-defined group tags of the following, <code>addtag INDEX gt/sample</code> command would apply tags both TAG1 and TAG2 to task at index 1</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>definetag gt/sample t/TAG1</code></p>
-</li>
-<li>
-<p><code>definetag gt/sample t/TAG2</code></p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="import-a-project-list-code-import-code"><a class="link" href="#import-a-project-list-code-import-code">5.2.8. Import a project list: <code>import</code></a></h4>
+<h4 id="import-a-project-list-code-import-code"><a class="link" href="#import-a-project-list-code-import-code">5.2.6. Import a project list: <code>import</code></a></h4>
 <div class="paragraph">
 <p>Use this function when importing a project list shared by a friend to import additional projects and tasks on top of your current project list.</p>
 </div>
@@ -576,7 +492,7 @@ The full path to the JSON file has to be specified unless the file is contained 
 </div>
 </div>
 <div class="sect3">
-<h4 id="export-projects-to-json-file-code-export-code"><a class="link" href="#export-projects-to-json-file-code-export-code">5.2.9. Export projects to JSON file: <code>export</code></a></h4>
+<h4 id="export-projects-to-json-file-code-export-code"><a class="link" href="#export-projects-to-json-file-code-export-code">5.2.7. Export projects to JSON file: <code>export</code></a></h4>
 <div class="paragraph">
 <p>You could export projects from your NoteNote instance to easily share project tasks with your friends. Projects are exported in JSON format and could be imported by another NoteNote instance using <code>import</code>.</p>
 </div>
@@ -620,7 +536,7 @@ Output path should be explicitly specified unless the output is to be within the
 </div>
 </div>
 <div class="sect3">
-<h4 id="analyse-progress-of-all-projects-code-analyse-code"><a class="link" href="#analyse-progress-of-all-projects-code-analyse-code">5.2.10. Analyse progress of all projects: <code>analyse</code></a></h4>
+<h4 id="analyse-progress-of-all-projects-code-analyse-code"><a class="link" href="#analyse-progress-of-all-projects-code-analyse-code">5.2.8. Analyse progress of all projects: <code>analyse</code></a></h4>
 <div class="paragraph">
 <p>View number of completed and uncompleted tasks of each project.</p>
 </div>
@@ -639,7 +555,7 @@ Output path should be explicitly specified unless the output is to be within the
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-previously-entered-commands-code-history-code"><a class="link" href="#list-previously-entered-commands-code-history-code">5.2.11. List previously entered commands: <code>history</code></a></h4>
+<h4 id="list-previously-entered-commands-code-history-code"><a class="link" href="#list-previously-entered-commands-code-history-code">5.2.9. List previously entered commands: <code>history</code></a></h4>
 <div class="paragraph">
 <p>Lists all the commands that were previously entered in reverse chronological order.</p>
 </div>
@@ -719,7 +635,72 @@ A task can have any number of tags (including 0).
 </div>
 </div>
 <div class="sect3">
-<h4 id="clearing-all-task-code-clear-code"><a class="link" href="#clearing-all-task-code-clear-code">6.2.2. Clearing all task: <code>clear</code></a></h4>
+<h4 id="adding-a-group-tag-code-addtag-code"><a class="link" href="#adding-a-group-tag-code-addtag-code">6.2.2. Adding a group tag: <code>addtag</code></a></h4>
+<div class="paragraph">
+<p>Add a previously defined group tag to a task.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>addtag INDEX gt/GROUPTAG</code></p>
+</li>
+<li>
+<p>Alias: <code>at</code>, i.e. <code>addtag</code> is equivalent to <code>at</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addtag 1 gt/Consultation</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: Task Box (Panel D) will show the updated task with newly added tags.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Tags defined under the group tag will be visible under the task instead of the group tag itself.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In cases where the user input pre-defined group tags of the following, <code>addtag INDEX gt/sample</code> command would apply tags both TAG1 and TAG2 to task at index 1</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>definetag gt/sample t/TAG1</code></p>
+</li>
+<li>
+<p><code>definetag gt/sample t/TAG2</code></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clearing-all-task-code-clear-code"><a class="link" href="#clearing-all-task-code-clear-code">6.2.3. Clearing all task: <code>clear</code></a></h4>
 <div class="paragraph">
 <p>Clears all task in the project that is selected.</p>
 </div>
@@ -748,7 +729,7 @@ A task can have any number of tags (including 0).
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-a-task-code-edit-code"><a class="link" href="#editing-a-task-code-edit-code">6.2.3. Editing a task: <code>edit</code></a></h4>
+<h4 id="editing-a-task-code-edit-code"><a class="link" href="#editing-a-task-code-edit-code">6.2.4. Editing a task: <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing task identified by the index number used in the displayed task list.</p>
 </div>
@@ -789,7 +770,7 @@ At least 1 among the parameters of <code>[n/NAME] [ds/DESCRIPTION] [dl/DEADLINE]
 </div>
 </div>
 <div class="sect3">
-<h4 id="locating-tasks-by-name-code-find-code"><a class="link" href="#locating-tasks-by-name-code-find-code">6.2.4. Locating tasks by name: <code>find</code></a></h4>
+<h4 id="locating-tasks-by-name-code-find-code"><a class="link" href="#locating-tasks-by-name-code-find-code">6.2.5. Locating tasks by name: <code>find</code></a></h4>
 <div class="paragraph">
 <p>Finds a project, task or subtask whose name contains any of the given keywords.</p>
 </div>
@@ -834,7 +815,7 @@ Tasks matching at least one keyword will be returned (i.e. <code>OR</code> searc
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-all-tasks-code-list-code"><a class="link" href="#listing-all-tasks-code-list-code">6.2.5. Listing all tasks: <code>list</code></a></h4>
+<h4 id="listing-all-tasks-code-list-code"><a class="link" href="#listing-all-tasks-code-list-code">6.2.6. Listing all tasks: <code>list</code></a></h4>
 <div class="paragraph">
 <p>Lists all tasks in the current project. Can also be used to show all tasks after finding a specific tasks</p>
 </div>
@@ -850,7 +831,26 @@ Tasks matching at least one keyword will be returned (i.e. <code>OR</code> searc
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-task-code-delete-code"><a class="link" href="#deleting-a-task-code-delete-code">6.2.6. Deleting a task: <code>delete</code></a></h4>
+<h4 id="list-all-tags-code-listtag-code"><a class="link" href="#list-all-tags-code-listtag-code">6.2.7. List all tags: <code>listtag</code></a></h4>
+<div class="paragraph">
+<p>List all unique tags and associated tasks within a project</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>listtag</code></p>
+</li>
+<li>
+<p>Alias: <code>lt</code>, i.e. <code>listtag</code> is equivalent to <code>lt</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: Result Box (Panel B) will will display all unique tags and associated tasks within a project.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-task-code-delete-code"><a class="link" href="#deleting-a-task-code-delete-code">6.2.8. Deleting a task: <code>delete</code></a></h4>
 <div class="paragraph">
 <p>Deletes the specified task identified by the index number used in the displayed task list.</p>
 </div>
@@ -895,7 +895,7 @@ The index <strong>must be a positive integer</strong> 1, 2, 3, …
 </div>
 </div>
 <div class="sect3">
-<h4 id="completing-a-task-code-completed-code"><a class="link" href="#completing-a-task-code-completed-code">6.2.7. Completing a task: <code>completed</code></a></h4>
+<h4 id="completing-a-task-code-completed-code"><a class="link" href="#completing-a-task-code-completed-code">6.2.9. Completing a task: <code>completed</code></a></h4>
 <div class="paragraph">
 <p>Marks the specified task identified by the index number used in the displayed task list as completed by adding a <code>completed</code> tag to it.</p>
 </div>
@@ -936,7 +936,7 @@ Completed tasks will be used as statistics for the <code>analyse</code> feature,
 </div>
 </div>
 <div class="sect3">
-<h4 id="selecting-a-task-code-select-code"><a class="link" href="#selecting-a-task-code-select-code">6.2.8. Selecting a task: <code>select</code></a></h4>
+<h4 id="selecting-a-task-code-select-code"><a class="link" href="#selecting-a-task-code-select-code">6.2.10. Selecting a task: <code>select</code></a></h4>
 <div class="paragraph">
 <p>Selects the task identified by the index number used in the displayed task list and
 loads the relevant information.</p>
@@ -988,7 +988,7 @@ targeted at a Project</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-tasks-code-listdeadline-code"><a class="link" href="#sorting-tasks-code-listdeadline-code">6.2.9. Sorting tasks: <code>listDeadline</code></a></h4>
+<h4 id="sorting-tasks-code-listdeadline-code"><a class="link" href="#sorting-tasks-code-listdeadline-code">6.2.11. Sorting tasks: <code>listDeadline</code></a></h4>
 <div class="paragraph">
 <p>Sorts tasks by deadline.</p>
 </div>
@@ -1005,7 +1005,7 @@ targeted at a Project</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undo-previous-command-code-undo-code"><a class="link" href="#undo-previous-command-code-undo-code">6.2.10. Undo previous command : <code>undo</code></a></h4>
+<h4 id="undo-previous-command-code-undo-code"><a class="link" href="#undo-previous-command-code-undo-code">6.2.12. Undo previous command : <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Restores the task list to the state before the previous undoable command was
 executed.</p>
@@ -1058,7 +1058,7 @@ new task .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="redo-previously-undone-command-code-redo-code"><a class="link" href="#redo-previously-undone-command-code-redo-code">6.2.11. Redo previously undone command : <code>redo</code></a></h4>
+<h4 id="redo-previously-undone-command-code-redo-code"><a class="link" href="#redo-previously-undone-command-code-redo-code">6.2.13. Redo previously undone command : <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.</p>
 </div>
@@ -1121,7 +1121,7 @@ new task .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-previously-entered-commands-for-a-chosen-task-code-taskhistory-code"><a class="link" href="#list-previously-entered-commands-for-a-chosen-task-code-taskhistory-code">6.2.12. List previously entered commands for a chosen task: <code>taskhistory</code></a></h4>
+<h4 id="list-previously-entered-commands-for-a-chosen-task-code-taskhistory-code"><a class="link" href="#list-previously-entered-commands-for-a-chosen-task-code-taskhistory-code">6.2.14. List previously entered commands for a chosen task: <code>taskhistory</code></a></h4>
 <div class="paragraph">
 <p>Lists all previous commands that directly affected a selected task in reverse
 chronological order.</p>
@@ -1173,7 +1173,7 @@ affects the task at index 1 (Figure 3).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="compares-a-task-with-its-previous-version-code-compare-code"><a class="link" href="#compares-a-task-with-its-previous-version-code-compare-code">6.2.13. Compares a task with its previous version: <code>compare</code></a></h4>
+<h4 id="compares-a-task-with-its-previous-version-code-compare-code"><a class="link" href="#compares-a-task-with-its-previous-version-code-compare-code">6.2.15. Compares a task with its previous version: <code>compare</code></a></h4>
 <div class="paragraph">
 <p>Compares a selected task one version before it was edited and show the differences
 in the task.</p>
@@ -1426,4 +1426,4 @@ thus <code>compare</code> will no longer work as intended when you return to vie
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 07:55:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 09:31:08 UTC</div></div></div></body></html>
