@@ -743,6 +743,9 @@ If the <code>currentStatePointer</code> is at index <code>projectStateList.size(
 </div>
 <div class="sect2">
 <h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.2. Import/Export feature</a></h3>
+<div class="paragraph">
+<p>The import and export feature was implemented in order to facilitate easy transfer of projects and tasks between two NoteNote users.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
@@ -808,6 +811,15 @@ If user launches the application for the first time, <code>projectList</code> wi
 </ol>
 </div>
 <div class="paragraph">
+<p>The following sequence diagram shows how the import operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportUML.png" alt="ImportUML" width="650">
+</div>
+<div class="title">Figure 8. Sequence Diagram for <code>import</code> Command</div>
+</div>
+<div class="paragraph">
 <p>Step 3. The user executes <code>export i/1,2,3 o/./data/export.json</code> to export projects with index 1, 2 and 3.</p>
 </div>
 <div class="olist loweralpha">
@@ -832,9 +844,21 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the export operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportUML.png" alt="ExportUML" width="650">
+</div>
+<div class="title">Figure 9. Sequence Diagram for <code>export</code> Command</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>We considered two designs for the format to import and export multiple projects and tasks within the project list.</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -843,44 +867,29 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Consideration</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternative one</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternative two</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative one</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative two</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method of tracking multiple projects within project list and multiple tasks within each project</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> to keep track of tasks.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May clutter data folder with too many project files. Application will have to read a new project file whenever user switches project.</p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><strong>Current Choice</strong></p>
-</div>
-<div class="paragraph">
-<p>All projects within project list and all tasks of all projects contained in <strong><em>project.json</em></strong> file.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will not clutter data folder.</p>
-</li>
-<li>
-<p>Cons: Entire project list has to be written to file every time project list is modified.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This option was chosen as it facilitates importing and exporting projects to one file only.</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Consideration</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> which contains only that project&#8217;s tasks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All projects and all tasks to be contained in a single <strong><em>project.json</em></strong> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Pros</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to implement.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Will not clutter data folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cons</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">May clutter data folder with too many project files. Application will have to read a new project file whenever user switches project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage model has to be modified to support new storage structure.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Current Choice</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This option was chosen as users need not handle multiple files when importing and exporting projects.</p></td>
 </tr>
 </tbody>
 </table>
@@ -910,7 +919,7 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 <div class="content">
 <img src="images/compare1.png" alt="compare1" width="900">
 </div>
-<div class="title">Figure 8. Example of VersionedProject when <code>edit</code> on Task B</div>
+<div class="title">Figure 10. Example of VersionedProject when <code>edit</code> on Task B</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 8.) is an example usage scenario and how the Compare Task mechanism behaves.</p>
@@ -929,7 +938,7 @@ within <code>projectStateList</code> and passed into <code>CompareCommand#Comman
 <div class="content">
 <img src="images/compare2.png" alt="compare2" width="900">
 </div>
-<div class="title">Figure 9. Process of how <code>compare</code> command will flow</div>
+<div class="title">Figure 11. Process of how <code>compare</code> command will flow</div>
 </div>
 <div class="paragraph">
 <p>Step 4. <code>VersionedProject#compareTask()</code> will iterate through all the the tasks within each project state. The <code>taskId</code>
@@ -955,7 +964,7 @@ that is encountered, "Nothing to compare" will be showed to the user.
 <div class="content">
 <img src="images/compare%203.png" alt="compare 3" width="800">
 </div>
-<div class="title">Figure 10. A successful <code>compare</code> where name is different</div>
+<div class="title">Figure 12. A successful <code>compare</code> where name is different</div>
 </div>
 <div class="paragraph">
 <p>Step 6. If there is a difference in any of the fields in the comparison (Figure 10), the difference will be showed to the user.
@@ -1009,7 +1018,7 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <div class="content">
 <img src="images/compareseq.png" alt="compareseq" width="900">
 </div>
-<div class="title">Figure 11. Sequence Diagram for <code>compare</code> Command</div>
+<div class="title">Figure 13. Sequence Diagram for <code>compare</code> Command</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 11) is the sequence diagram when <code>compare</code> is called.</p>
@@ -1194,7 +1203,7 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <div class="content">
 <img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="900">
 </div>
-<div class="title">Figure 12. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
+<div class="title">Figure 14. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 12) is an example usage scenario of how the Task History mechanism behaves.</p>
@@ -1207,7 +1216,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 <div class="content">
 <img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="900">
 </div>
-<div class="title">Figure 13. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
+<div class="title">Figure 15. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
 </div>
 <div class="paragraph">
 <p>Note the behaviour when a <code>edit</code> command  is called (Figure 13). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
@@ -1220,7 +1229,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 <div class="content">
 <img src="images/taskhistoryseq.png" alt="taskhistoryseq" width="900">
 </div>
-<div class="title">Figure 14. Sequence Diagram for <code>taskhistory</code> Command</div>
+<div class="title">Figure 16. Sequence Diagram for <code>taskhistory</code> Command</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 14) is the sequence diagram when <code>taskhistory</code> is called.</p>
@@ -1446,7 +1455,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 15. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 17. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2386,4 +2395,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 09:31:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 05:18:28 UTC</div></div></div></body></html>

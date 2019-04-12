@@ -37,13 +37,14 @@ the refactoring required to morph the original AddressBook application to NoteNo
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: import new projects from a JSON file and export selected projects to a JSON file</p>
+<p>What it does: Import new projects from a JSON file and export selected projects to a JSON file</p>
 </li>
 <li>
 <p>Justification: This feature allows you to share projects with another user without having to add projects and tasks manually.</p>
 </li>
 <li>
-<p>Highlights: The implementation was challenging as it requires us to understand the implementation of the Storage component and the utilities that it relies on which we could take advantage of to implement our feature.</p>
+<p>Highlights: The implementation was challenging as it requires us to familiarize ourselves with the existing implementation of the Storage component and tweak it to support NoteNote&#8217;s storage requirement.
+Furthermore, we also had to understand the utilities (e.g. <code>FileUtil</code>, <code>JsonUtil</code>) that the Storage component relies on so as to take advantage of these utilities to implement <code>import</code> and <code>export</code>.</p>
 </li>
 </ul>
 </div>
@@ -72,26 +73,10 @@ the refactoring required to morph the original AddressBook application to NoteNo
 </div>
 </li>
 <li>
-<p>Justification: Morphing existing AddressBook application to NoteNote.</p>
+<p>Justification: The current implementation of AddressBook is unable to support all the functions of NoteNote and requires us to heavily morph the existing AddressBook application to NoteNote.</p>
 </li>
 <li>
-<p>Highlights: Implementation was challenging as it requires us to modify all existing components simultaneously due to interlinked components.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Minor enhancement</strong>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the <strong>UI</strong> to include a Project List Panel and Task List Panel</p>
-</li>
-<li>
-<p>Updated the <strong>storage</strong> to store tasks within project and project within project list</p>
-</li>
-<li>
-<p>Minor modification to <strong>Add, Edit, Select, Delete and Clear command</strong> to support new project list model</p>
+<p>Highlights: The implementation was challenging as it requires us to understand the implementation of all components and modify them simultaneously.</p>
 </li>
 </ul>
 </div>
@@ -108,10 +93,10 @@ the refactoring required to morph the original AddressBook application to NoteNo
 <div class="ulist">
 <ul>
 <li>
-<p>Wrote tests for <code>import</code> and <code>export</code> feature</p>
+<p>Wrote tests for <code>import</code> and <code>export</code> feature: [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/144">#144</a>], [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/187">#187</a>]</p>
 </li>
 <li>
-<p>Modified tests for existing features</p>
+<p>Modified tests for existing features: [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/42">#42</a>], [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/144">#144</a>]</p>
 </li>
 </ul>
 </div>
@@ -121,10 +106,10 @@ the refactoring required to morph the original AddressBook application to NoteNo
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide:</p>
+<p>Did cosmetic tweaks to existing contents of the User Guide: [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/88">#88</a>], [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/122">#122</a>], [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/172">#172</a>]</p>
 </li>
 <li>
-<p>Did cosmetic tweaks to existing contents of the Developer Guide:</p>
+<p>Did cosmetic tweaks to existing contents of the Developer Guide: [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/117">#117</a>], [<a href="https://github.com/CS2113-AY1819S2-T09-3/main/pull/172">#172</a>]</p>
 </li>
 </ul>
 </div>
@@ -180,18 +165,6 @@ the refactoring required to morph the original AddressBook application to NoteNo
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/BeforeImportCommand.png" alt="BeforeImportCommand" width="600">
-</div>
-<div class="title">Figure 2. Before executing <code>import</code></div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/AfterImportCommand.png" alt="AfterImportCommand" width="600">
-</div>
-<div class="title">Figure 3. After executing <code>import</code></div>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -205,7 +178,23 @@ The full path to the JSON file has to be specified unless the file is contained 
 </table>
 </div>
 <div class="paragraph">
-<p>Outcome: Projects and tasks contained in JSON file will be imported and added on top of current project list. Command box will display number of projects added to project list.</p>
+<p>Outcome: Command box will display number of projects added to project list. Projects and tasks contained in JSON file will be imported and added to current project list.
+Refer to diagrams below on what NoteNote will display before and after successful execution of <code>import</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BeforeImportCommand.png" alt="BeforeImportCommand" width="600">
+</div>
+<div class="title">Figure 2. Before executing <code>import</code></div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterImportCommand.png" alt="AfterImportCommand" width="600">
+</div>
+<div class="title">Figure 3. After executing <code>import</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -251,6 +240,12 @@ Output path should be explicitly specified unless the output is to be within the
 <div class="paragraph">
 <p>Outcome: JSON file will be created at output path specified.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterExportCommand.png" alt="AfterExportCommand" width="600">
+</div>
+<div class="title">Figure 4. After executing <code>export</code></div>
+</div>
 </div>
 </div>
 </div>
@@ -269,6 +264,9 @@ Output path should be explicitly specified unless the output is to be within the
 </table>
 <div class="sect2">
 <h3 id="import-export-feature"><a class="link" href="#import-export-feature">Import/Export feature</a></h3>
+<div class="paragraph">
+<p>The import and export feature was implemented in order to facilitate easy transfer of projects and tasks between two NoteNote users.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
@@ -334,6 +332,15 @@ If user launches the application for the first time, <code>projectList</code> wi
 </ol>
 </div>
 <div class="paragraph">
+<p>The following sequence diagram shows how the import operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ImportUML.png" alt="ImportUML" width="650">
+</div>
+<div class="title">Figure 5. Sequence Diagram for <code>import</code> Command</div>
+</div>
+<div class="paragraph">
 <p>Step 3. The user executes <code>export i/1,2,3 o/./data/export.json</code> to export projects with index 1, 2 and 3.</p>
 </div>
 <div class="olist loweralpha">
@@ -358,9 +365,21 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the export operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ExportUML.png" alt="ExportUML" width="650">
+</div>
+<div class="title">Figure 6. Sequence Diagram for <code>export</code> Command</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p>We considered two designs for the format to import and export multiple projects and tasks within the project list.</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -369,48 +388,33 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Consideration</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternative one</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternative two</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative one</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative two</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method of tracking multiple projects within project list and multiple tasks within each project</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> to keep track of tasks.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May clutter data folder with too many project files. Application will have to read a new project file whenever user switches project.</p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><strong>Current Choice</strong></p>
-</div>
-<div class="paragraph">
-<p>All projects within project list and all tasks of all projects contained in <strong><em>project.json</em></strong> file.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will not clutter data folder.</p>
-</li>
-<li>
-<p>Cons: Entire project list has to be written to file every time project list is modified.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This option was chosen as it facilitates importing and exporting projects to one file only.</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Consideration</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each project will have its own <strong><em>&lt;Project File&gt;.json</em></strong> which contains only that project&#8217;s tasks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All projects and all tasks to be contained in a single <strong><em>project.json</em></strong> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Pros</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to implement.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Will not clutter data folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cons</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">May clutter data folder with too many project files. Application will have to read a new project file whenever user switches project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage model has to be modified to support new storage structure.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Current Choice</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This option was chosen as users need not handle multiple files when importing and exporting projects.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 09:31:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 05:18:28 UTC</div></div></div></body></html>
