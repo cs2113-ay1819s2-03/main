@@ -78,6 +78,8 @@
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-task">F.2. Deleting a task</a></li>
+<li><a href="#importing-projects">F.3. Importing projects</a></li>
+<li><a href="#exporting-projects">F.4. Exporting projects</a></li>
 </ul>
 </li>
 </ul>
@@ -2510,5 +2512,78 @@ Expected: Similar to previous.</p>
 <p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="importing-projects"><a class="link" href="#importing-projects">F.3. Importing projects</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Import new projects from an external JSON file</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: JSON file to import should exist and should not contain any duplicate projects.</p>
+</li>
+<li>
+<p>Test case: <code>import ./data/import.json</code><br>
+Expected: New projects will be added to the list and displayed at Project List panel.</p>
+</li>
+<li>
+<p>Test case: <code>import ./data/filethatdoesnotexist.json</code><br>
+Expected: No new projects are added to the list as JSON file does not exists.</p>
+</li>
+<li>
+<p>Other incorrect import commands to try: <code>import</code></p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 06:02:23 UTC</div></div></div></body></html>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exporting-projects"><a class="link" href="#exporting-projects">F.4. Exporting projects</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Export multiple projects to an external JSON file</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: At least one project should exist in project list.</p>
+</li>
+<li>
+<p>Test case: <code>export i/1 o/./data/export.json</code><br>
+Expected: Project at index 1 and its tasks will be exported to specified JSON file.</p>
+</li>
+<li>
+<p>Test case: <code>export i/1,2 o/./data/export.json</code><br>
+Expected: Projects at index 1 and 2 and its tasks will be exported to specified JSON file.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>export</code>, <code>export i/x o/./data/export.json</code> (where x is larger than the list size)</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Export selected project to an external JSON file</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: At least one project should exist in project list. Select a project to export using the <code>select <em>x</em></code> command from project level (where <em>x</em> is the project ID).</p>
+</li>
+<li>
+<p>Test case: <code>export o/./data/export.json</code><br>
+Expected: Selected project and its tasks will be exported to specified JSON file.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>export</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 08:50:57 UTC</div></div></div></body></html>

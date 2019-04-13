@@ -10,10 +10,10 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>NoteNote</strong> is an effective tool for organizing multiple projects and tasks through the Command Line Interface (CLI).</p>
+<p><strong>NoteNote</strong> is a project management tool created for Computing students to organize multiple projects and tasks effectively through the Command Line Interface (CLI).</p>
 </div>
 <div class="paragraph">
-<p>Other than keeping track of your projects and tasks, NoteNote allows you to analyze your productivity, categorize your tasks, share tasks with you friends and many more.</p>
+<p>Other than keeping track of your projects and tasks, NoteNote also allows you to analyze your productivity, categorize your tasks, share tasks with you friends and many more.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -27,30 +27,13 @@
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>My contributions to NoteNote includes the introduction of an import and export feature and
-the refactoring required to morph the original AddressBook application to NoteNote.</p>
+<p>My contributions to NoteNote consists of the implementation of the <code>import</code> and <code>export</code> feature and
+the refactoring required to morph the original AddressBook 4 application to NoteNote.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Enhancement 1</strong>: added <strong>the ability to import and export projects</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: Import new projects from a JSON file and export selected projects to a JSON file</p>
-</li>
-<li>
-<p>Justification: This feature allows you to share projects with another user without having to add projects and tasks manually.</p>
-</li>
-<li>
-<p>Highlights: The implementation was challenging as it requires us to familiarize ourselves with the existing implementation of the Storage component and tweak it to support NoteNote&#8217;s storage requirement.
-Furthermore, we also had to understand the utilities (e.g. <code>FileUtil</code>, <code>JsonUtil</code>) that the Storage component relies on so as to take advantage of these utilities to implement <code>import</code> and <code>export</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Enhancement 2</strong>: <strong>modified UI, Logic, Model and Storage components for NoteNote</strong></p>
+<p><strong>Enhancement 1: added the ability to import and export projects</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -58,25 +41,52 @@ Furthermore, we also had to understand the utilities (e.g. <code>FileUtil</code>
 <div class="ulist">
 <ul>
 <li>
-<p>UI would now display an additional panel to show list of projects</p>
+<p><code>import</code>: Imports new projects from a JSON file</p>
 </li>
 <li>
-<p>Logic is tweaked to load project list upon start up and associate projects with their tasks to allow navigation between projects and tasks.</p>
-</li>
-<li>
-<p>Introduce new classes in Model to support implementation of Project List, Project and Task.</p>
-</li>
-<li>
-<p>Storage is modified to keep track of multiple tasks within a project and multiple projects within a project list</p>
+<p><code>export</code>: Exports selected projects to a JSON file</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Justification: The current implementation of AddressBook is unable to support all the functions of NoteNote and requires us to heavily morph the existing AddressBook application to NoteNote.</p>
+<p>Justification: This feature allows you to easily share projects with another user without having to manually enter projects and tasks using the CLI.</p>
 </li>
 <li>
-<p>Highlights: The implementation was challenging as it requires us to understand the implementation of all components and modify them simultaneously.</p>
+<p>Highlights: The implementation was challenging as it requires us to familiarize ourselves with the existing implementation of the Storage component and tweak it to support NoteNote&#8217;s storage requirement.<br>
+Furthermore, we also had to understand the utilities (e.g. <code>FileUtil</code>, <code>JsonUtil</code>) that the Storage component relies on so as to take advantage of these utilities to implement <code>import</code> and <code>export</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Enhancement 2: modified UI, Logic, Model and Storage components for NoteNote</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>UI</strong> would now display an additional panel to show list of projects</p>
+</li>
+<li>
+<p><strong>Logic</strong> is tweaked to load project list upon start up and associate projects with their tasks to allow navigation between projects and tasks.</p>
+</li>
+<li>
+<p>Introduce new classes in <strong>Model</strong> to support implementation of Project List, Project and Task.</p>
+</li>
+<li>
+<p><strong>Storage</strong> is modified to keep track of multiple tasks within a project and multiple projects within a project list</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Justification: The current implementation of AddressBook is unable to support all the functions of NoteNote and requires us to heavily morph the existing AddressBook application.</p>
+</li>
+<li>
+<p>Highlights: The implementation was challenging as it requires us to understand the implementation of all the above-mentioned components and modify them simultaneously in order to verify that modification is done correctly.</p>
 </li>
 </ul>
 </div>
@@ -130,17 +140,17 @@ Furthermore, we also had to understand the utilities (e.g. <code>FileUtil</code>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are the sections that I have contributed to the User Guide to showcase my ability to write documentation targeting end-users.</em></p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect3">
 <h4 id="import-a-project-list-code-import-code"><a class="link" href="#import-a-project-list-code-import-code">Import a project list: <code>import</code></a></h4>
 <div class="paragraph">
-<p>Use this function when importing a project list shared by a friend to import additional projects and tasks on top of your current project list.</p>
+<p>Import projects and tasks to your NoteNote instance from project list shared by a friend. New projects and tasks will be added on top of current project list.</p>
 </div>
 <div class="paragraph">
-<p>Source file must be a JSON file and follow  specific format. See <a href="#samplejson">[samplejson]</a>.</p>
+<p>Source file must be a JSON file and follow a specific format. See <a href="#samplejson">[samplejson]</a>.</p>
 </div>
 <div class="paragraph">
 <p>This feature is recommended to be used together with <code>export</code> so that users need not manually generate a JSON file to <code>import</code>.</p>
@@ -178,8 +188,10 @@ The full path to the JSON file has to be specified unless the file is contained 
 </table>
 </div>
 <div class="paragraph">
-<p>Outcome: Command box will display number of projects added to project list. Projects and tasks contained in JSON file will be imported and added to current project list.
-Refer to diagrams below on what NoteNote will display before and after successful execution of <code>import</code>.</p>
+<p>Outcome: Command box will display number of projects added to project list. Projects and tasks contained in JSON file will be imported and added to current project list.</p>
+</div>
+<div class="paragraph">
+<p>Refer to diagrams below on what NoteNote will display before and after successful execution of <code>import</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -200,12 +212,12 @@ Refer to diagrams below on what NoteNote will display before and after successfu
 <div class="sect3">
 <h4 id="export-projects-to-json-file-code-export-code"><a class="link" href="#export-projects-to-json-file-code-export-code">Export projects to JSON file: <code>export</code></a></h4>
 <div class="paragraph">
-<p>You could export projects from your NoteNote instance to easily share project tasks with your friends. Projects are exported in JSON format and could be imported by another NoteNote instance using <code>import</code>.</p>
+<p>Export projects from your NoteNote instance to easily share projects and tasks with your friends. Projects are exported in JSON format and could be imported by another NoteNote instance using <code>import</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Format: <code>export i/INDEX o/OUTPUTPATH</code></p>
+<p>Format: <code>export [i/INDEX] o/OUTPUTPATH</code></p>
 </li>
 <li>
 <p>Alias: <code>ex</code>, i.e. <code>export</code> is equivalent to <code>ex</code></p>
@@ -218,10 +230,27 @@ Refer to diagrams below on what NoteNote will display before and after successfu
 <div class="ulist">
 <ul>
 <li>
-<p>To export multiple projects: <code>export i/1,2,3 o/C:\Users\Test\Desktop\export.json</code></p>
+<p>To export currently selected project:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>select 1</code></p>
 </li>
 <li>
-<p>To export currently selected project: <code>export o/C:\Users\Test\Desktop\export.json</code></p>
+<p><code>export o/C:\Users\Test\Desktop\export.json</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>To export multiple projects:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>export i/1,2,3 o/C:\Users\Test\Desktop\export.json</code></p>
+</li>
+</ol>
+</div>
 </li>
 </ul>
 </div>
@@ -232,7 +261,7 @@ Refer to diagrams below on what NoteNote will display before and after successfu
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Output path should be explicitly specified unless the output is to be within the application folder. If output is to be contained in application folder, the <code>export i/1,2,3 o/.\test.json</code> is sufficient.
+Output path should be explicitly specified unless the output is to be within the application folder. If output is to be contained in application folder, the relative path <code>export i/1,2,3 o/.\test.json</code> is sufficient.
 </td>
 </tr>
 </table>
@@ -258,7 +287,7 @@ Output path should be explicitly specified unless the output is to be within the
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are the sections that I have contributed to the Developer Guide to showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -417,4 +446,4 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 06:02:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 08:50:57 UTC</div></div></div></body></html>
