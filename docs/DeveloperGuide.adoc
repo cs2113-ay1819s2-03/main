@@ -417,7 +417,7 @@ that is encountered, "Nothing to compare" will be showed to the user.
 
 Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description & deadline (Figure 12, B).
 
-image::compare 3.png[width="700", title="A successful `compare` where name is different"]
+image::compare 3.png[width="400", title="A successful `compare` where name is different"]
 
 Step 6. If there is a difference in any of the fields in the comparison (Figure 13), the difference will be showed to the user.
 Else Step 4. will continue to run to look for another version of the chosen task to compare (Figure 12, C).
