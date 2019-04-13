@@ -83,6 +83,8 @@
 <li><a href="#list-tags">F.5. List tags</a></li>
 <li><a href="#define-tags">F.6. Define tags</a></li>
 <li><a href="#add-tags">F.7. Add tags</a></li>
+<li><a href="#completing-a-task">F.8. Completing a task</a></li>
+<li><a href="#analysing-projects">F.9. Analysing projects</a></li>
 </ul>
 </li>
 </ul>
@@ -2838,5 +2840,64 @@ Expected: No group tag will be applied to task and the Result box will display "
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="completing-a-task"><a class="link" href="#completing-a-task">F.8. Completing a task</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adds <code>completed</code> tag to task</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>At least one task should exist in selected project</p>
+</li>
+<li>
+<p>Users should have already navigated to task level</p>
+</li>
+</ul>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 11:35:12 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Test case: <code>completed 1</code><br>
+Expected: Task Box displays the updated task with a newly added <code>completed</code> tag.</p>
+</li>
+<li>
+<p>Test case: <code>completed</code><br>
+Expected: No <code>completed</code> tag is added to any task in Task Box. Results Box displays error message "The task index provided is invalid".</p>
+</li>
+<li>
+<p>Other incorrect completed commands to try: <code>completed 1 2</code>, <code>completed</code>, <code>completed x</code> (where x is not a valid index)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="analysing-projects"><a class="link" href="#analysing-projects">F.9. Analysing projects</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Displays number of completed tasks for each project, and percentage of each project completed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>analyse</code><br>
+Expected: Results Box displays "&lt;Name of project&gt;: x tasks completed. (Percentage of project completed: yy.y%)", with the fields matching the details and statistics for each project.</p>
+</li>
+<li>
+<p>Note that the addition of parameters (e.g. <code>analyse 1</code>, <code>analyse -5</code> etc.) will automatically be ignored and still result in the correct execution of <code>analyse</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 14:32:20 UTC</div></div></div></body></html>
