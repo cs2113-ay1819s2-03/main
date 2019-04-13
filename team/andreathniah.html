@@ -10,14 +10,11 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>NoteNote</strong> is the go-to task management tool built for computing students to keep track of all your task right at your fingertips. With a minimalistic command line interface (CLI) which users would be more than familiar with as computing students, NoteNote is an efficient tool that sorts through tasks quicky and efficiently. NoteNote also allows users to analyze their productivity, categorize their tasks, share tasks with their friends and many more.</p>
-</div>
-<div class="paragraph">
-<p>This application was developed by a team of four for CS2113T, an module from the National University of Singapore over 13 weeks.</p>
+<p><strong>NoteNote</strong> is the go-to task management tool built for computing students to keep track of all your task right at your fingertips. With a minimalistic command line interface which users would be more than familiar with as computing students, NoteNote is an efficient tool that sorts through tasks quicky and efficiently. NoteNote also allows users to analyze their productivity, categorize their tasks, share tasks with their friends and many more.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/demolayout.png" alt="demolayout" width="800">
+<img src="../images/demolayout.png" alt="demolayout" width="600">
 </div>
 <div class="title">Figure 1. Application Layout</div>
 </div>
@@ -338,7 +335,7 @@ It requires users to navigate to a project first with <code>select</code> comman
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ListTagSequenceDiagram.png" alt="ListTagSequenceDiagram" width="900">
+<img src="../images/ListTagSequenceDiagram.png" alt="ListTagSequenceDiagram" width="600">
 </div>
 <div class="title">Figure 5. Sequence Diagram for <code>listtag</code> Command</div>
 </div>
@@ -376,12 +373,6 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A large <code>Model</code> might result in a slow system performance.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ListTagCommand</code> will be cluttered and many of its functions will not be reusable.</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p>
-<p class="tableblock">This option allows for other commands such as <code>ListTagCommandTest</code> to make use of the same function without rewriting the same logic.</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -413,7 +404,7 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/DefineTagSequenceDiagram.png" alt="DefineTagSequenceDiagram" width="900">
+<img src="../images/DefineTagSequenceDiagram.png" alt="DefineTagSequenceDiagram" width="600">
 </div>
 <div class="title">Figure 6. Sequence Diagram for <code>definetag</code> Command</div>
 </div>
@@ -449,11 +440,6 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All group tags created in <code>DefineTagCommand</code> will be lost once the instance of <code>NoteNote</code> is closed.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Harder to implement, can be considered for future version in v2.0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -531,7 +517,7 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddTagSequenceDiagram.png" alt="AddTagSequenceDiagram" width="900">
+<img src="../images/AddTagSequenceDiagram.png" alt="AddTagSequenceDiagram" width="600">
 </div>
 <div class="title">Figure 7. Sequence Diagram for <code>addtag</code> Command</div>
 </div>
@@ -557,7 +543,7 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Tags in group tag are added to the task by a separate command and remain visible in Task List</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addTagCommand</code> to be incoperated in <code>addCommand</code> directly. (i.e. users can add a group tag into a task via the existing <code>add</code> and <code>edit</code> command with <code>gt/GROUPTAG</code> as a parameter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users can add a group tag into a task via the existing <code>add</code> and <code>edit</code> command with <code>gt/GROUPTAG</code> as a parameter</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
@@ -569,14 +555,9 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Might be confusing to users since tags are usually added via <code>add</code> or <code>edit</code> commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Harder to implement, can be considered for future version in v2.0</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 10:37:39 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 11:35:12 UTC</div></div></div></body></html>
