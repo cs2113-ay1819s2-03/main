@@ -388,11 +388,15 @@ Building on top of the Undo/Redo feature, it is facilitated by `VersionedProject
 
 * `VersionedProject#compareTask()` -- Compares the chosen task with its previous version if it exist.
 
+image::compareseq.png[width="900", title="Sequence Diagram for `compare` Command"]
+
+Given above (Figure 10) is the sequence diagram when `compare` is called.
+
 These operations are exposed in the `Model` interface as `Model#compareTask()`.
 
 image::compare1.png[width="900", title="Example of VersionedProject when `edit` on Task B"]
 
-Given above (Figure 8.) is an example usage scenario and how the Compare Task mechanism behaves.
+Given above (Figure 11.) is an example usage scenario and how the Compare Task mechanism behaves.
 
 
 Step 1. The user selects the task to compare by entering the index of the task that is shown. `CompareCommandParser#CompareCommand()` will then get the index of the task
@@ -405,18 +409,18 @@ Step 3. `VersionedProject#compareTask()` will retrieve the unique `taskId` of th
 image::compare2.png[width="900", title="Process of how `compare` command will flow"]
 
 Step 4. `VersionedProject#compareTask()` will iterate through all the the tasks within each project state. The `taskId`
-will be used to determine if the task encountered during the iteration is the same as the chosen task (Figure 9, A).
+will be used to determine if the task encountered during the iteration is the same as the chosen task (Figure 12, A).
 
 [NOTE]
 If no same tasks are found after iterating through all the project states, or if there is no difference in all the task
 that is encountered, "Nothing to compare" will be showed to the user.
 
-Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description & deadline (Figure 9, B).
+Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description & deadline (Figure 12, B).
 
 image::compare 3.png[width="800", title="A successful `compare` where name is different"]
 
 Step 6. If there is a difference in any of the fields in the comparison (Figure 10), the difference will be showed to the user.
-Else Step 4. will continue to run to look for another version of the chosen task to compare (Figure 9, C).
+Else Step 4. will continue to run to look for another version of the chosen task to compare (Figure 12, C).
 
 ==== Design Considerations
 Two designs was considered for the implementation of `compare`. The pros and cons of the designs are listed in the table below
@@ -439,12 +443,6 @@ and our *chosen option is Alternative 1*
 |*Implemented*
 |
 |===
-
-==== Sequence Diagram (`compare`)
-
-image::compareseq.png[width="900", title="Sequence Diagram for `compare` Command"]
-
-Given above (Figure 11) is the sequence diagram when `compare` is called.
 // end::compare[]
 
 // tag::list[]
@@ -523,31 +521,37 @@ View task edit history allows the user to view a list of all the edit history of
 ==== Current Implementation
 
 Stores a parallel list `userInputHistoryTaskId` along `userInputHistory`, containing the taskId of `edit`/`completed`/`addtag`/`delete` commands.
-
 The list will store `0` for all other commands.
+
+image::taskhistoryseq.png[width="900", title="Sequence Diagram for `taskhistory` Command"]
+
+Given above (Figure 14) is the sequence diagram when `taskhistory` is called.
 
 It is facilitated by `CommandHistory` and implements the following operations:
 
-* `CommandHistory#addHistoryTaskId()` -- Adds taskId to the index that is the same as the `edit` command. Pads `0` for all other commands.
+* `CommandHistory#addHistoryTaskId()` -- Adds taskId to the index that is the same as the `edit`/`completed`/`addtag`/`delete` command. Pads `0` for all other commands.
+
+Step 1. When `taskhistory` is executed, `CommandHistory#getHistory()`, `CommandHistory#getHistoryTaskId()` and `Task#getTaskId()` is called.
+Retrieving a list of `userInputHistory`, a list of `userInputHistoryTaskId` and the taskID of a task, `taskId`
+
+Step 2. `userInputHistoryTaskId` will be iterated through.
+
+* Step 2a. If `taskId` of the selected task appears within `userInputHistoryTaskId`, the index at that position will be used
+to retrieve the command string within `userInputHistory`. The string will then be appended to a ArrayList<string>, `commandlist`.
+
+Step 3. If `commandList` is not empty, it will be printed in reverse order(newest command first, oldest command last) to the user.
+
+==== Behaviour when commands are executed
 
 image::ViewTaskHistorySeq1.png[width="900", title="Behaviour of userTaskHistoryTaskId during `add` commands"]
 
-Given above (Figure 12) is an example usage scenario of how the Task History mechanism behaves.
-
-Note the behaviour of useTaskHistoryTaskId when all other commands (not `edit`) is called (Figure 12). `CommandHistory#addHistoryTaskId()` will not be called thus `userInputHistoryTaskId` will not be updated.
+Note the behaviour of useTaskHistoryTaskId when all other commands (*not* `edit`/`completed`/`addtag`/`delete`) is called (Figure 12). `CommandHistory#addHistoryTaskId()` will not be called thus `userInputHistoryTaskId` will not be updated.
 However `userInputHistory` will still be updated as usual.
 
 image::ViewTaskHistorySeq2.png[width="900", title="Behaviour of userTaskHistoryTaskId during `edit` commands"]
 
 Note the behaviour when a `edit` command  is called (Figure 13). `CommandHistory#addHistoryTaskId()` will be called thus `userInputHistoryTaskId` will be updated with the taskId of the task where the
 `edit` command is called on. Observe that positions of previous non-`edit` command will be filled with `0`. `userInputHistory` will still be updated as usual.
-
-==== Sequence Diagram (`taskhistory`)
-
-image::taskhistoryseq.png[width="900", title="Sequence Diagram for `taskhistory` Command"]
-
-Given above (Figure 14) is the sequence diagram when `taskhistory` is called.
-
 
 ==== Design Considerations
 Two designs was considered for the implementation of `taskhistory`. The pros and cons of the designs are listed in the table below
