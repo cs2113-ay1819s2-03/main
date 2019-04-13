@@ -80,6 +80,9 @@
 <li><a href="#deleting-a-task">F.2. Deleting a task</a></li>
 <li><a href="#importing-projects">F.3. Importing projects</a></li>
 <li><a href="#exporting-projects">F.4. Exporting projects</a></li>
+<li><a href="#list-tags">F.5. List tags</a></li>
+<li><a href="#define-tags">F.6. Define tags</a></li>
+<li><a href="#add-tags">F.7. Add tags</a></li>
 </ul>
 </li>
 </ul>
@@ -1058,124 +1061,280 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </div>
 <div class="sect2">
 <h3 id="list-tag-feature"><a class="link" href="#list-tag-feature">3.5. List Tag feature</a></h3>
+<div class="paragraph">
+<p>The <code>listtag</code> feature allows users to list all unique tags and associated tasks within a project.
+It requires users to navigate to a project first with <code>select</code> command before executing the <code>listtag</code> command. Failure to do so would trigger an error message prompting users to do so.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Step 1: User starts to list all tags and their relevant tasks by <code>listtag</code>. <code>ListTagCommand</code> retrieves result of <code>Model#filteredTaskList()</code> and iterate through all the tasks and obtain a list of unique tags within each project state.</p>
+<p>Step 1. The user launches the application. <code>projectList</code> will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2: Through this list of unique tags and another iteration through all tasks, task names with the same tags are concatenated to a string and displayed to <code>CommandResult</code></p>
+<p>Step 2. The user selects a project. <code>setProject()</code> is invoked based on <code>Model#filteredProjectList</code>, and the tasks for that project are displayed via invoking <code>Model#filteredTaskList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3: User displays all tags and their associated tasks in the project by entering <code>listtag</code> and the following operations are carried out:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ListTagCommand</code> calls <code>Model#getTagWithTaskList()</code> who in turns calls <code>Model#getUniqueTagList()</code></p>
+</li>
+<li>
+<p><code>Model#getUniqueTagList()</code> makes use of the list of tasks obtained from <code>filteredTask</code> to iterate through all tasks and returns a list of unique tags within each project state</p>
+</li>
+<li>
+<p><code>Model#getTagWithTaskList()</code> uses a nested loop to iterate through this list of unique tags and the list of tasks to concatenate all tasks with the same tags into a string</p>
+</li>
+<li>
+<p>This string is returned to <code>ListTagCommand</code> and displayed to <code>CommandResult</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the List Tag operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListTagSequenceDiagram.png" alt="ListTagSequenceDiagram" width="900">
+</div>
+<div class="title">Figure 14. Sequence Diagram for <code>listtag</code> Command</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> <code>getFilteredTaskList</code> to retrieve relevant information.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: Data from <code>getFilteredTaskList</code> have to be parsed and clean all in one file.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Two designs was considered for the implementation of <code>listtag</code>. The pros and cons of the designs are listed in the table below
+and our <strong>chosen option is Alternative 1</strong></p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Cleaning of data to be done at their respective/relevant class files.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will not clutter <code>ListTagCommand</code> file.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seperate parsing and cleaning of <code>filteredTask</code> to obtain the string of tags with their associated task to be done at <code>Model</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parsing and cleaning of <code>filteredTask</code> to obtain the string of tags with their associated task to be done directly at <code>ListTagCommand</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functions are reusable since they are located <code>Model</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to implement.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A large <code>Model</code> might result in a slow system performance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ListTagCommand</code> will be cluttered and many of its functions will not be reusable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p>
+<p class="tableblock">This option allows for other commands such as <code>ListTagCommandTest</code> to make use of the same function without rewriting the same logic.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="define-tag-feature"><a class="link" href="#define-tag-feature">3.6. Define Tag feature</a></h3>
+<div class="paragraph">
+<p>The <code>definetag</code> feature allows users to create a group tag and add multiple child tags into it. It should be used in conjunction with <code>addtag</code> feature.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>definetag</code> feature allows users to create a group tag and add multiple child tags into it. It should be used in conjuction with <code>addtag</code> feature.</p>
+<p><code>definetag</code> feature can be used on both <code>project</code> and <code>task</code> level. Duplicated group tags created from <code>definetag</code> command are not allowed.</p>
 </div>
 <div class="paragraph">
-<p>Step 1: User creates new group tag and its associated children tag with <code>definetag</code>. <code>DefineTagCommandParser</code> create a new <code>GroupTag</code> object that contains the group tag’s name and its associated tags and return them to <code>DefineTagCommand</code>.</p>
+<p>Step 1. The user launches the application. <code>projectList</code> will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2: <code>DefineTagCommand</code> checks if GroupTag is unique via <code>Model#hasGroupTag</code> and adds the object to the model with <code>Model#addGroupTag</code> and <code>Model#commitProjectList</code> if it is.</p>
+<p>Step 2: User creates a new group tag and its associated child tags with <code>definetag</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3: <code>DefineTagCommandParser</code> create a new <code>GroupTag</code> object from the user&#8217;s input. The object contains the group tag’s name and its associated tags and are return to <code>DefineTagCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: <code>DefineTagCommand</code> checks if the returned <code>GroupTag</code> is unique via <code>Model#hasGroupTag()</code> and adds the object to the model with <code>Model#addGroupTag()</code> and <code>Model#commitProjectList</code> if it is.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the Define Tag operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DefineTagSequenceDiagram.png" alt="DefineTagSequenceDiagram" width="900">
+</div>
+<div class="title">Figure 15. Sequence Diagram for <code>definetag</code> Command</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Results of define tag is not stored.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: Created group tag is lost once the NoteNote instance is restarted.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Two designs was considered for the implementation of <code>definetag</code>. The pros and cons of the designs are listed in the table below and our <strong>chosen option is Alternative 1</strong></p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Storing results of define tag.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Created group tag can be used between all instances of NoteNote.</p>
-</li>
-<li>
-<p>Cons: Harder to implement.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redefine group tag and its associated child tags every instances of <code>NoteNote</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Saves the group tags and its associated child tags created via <code>DefineTagCommand</code> into storage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to implement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Better user experience since group tags established in previous instances of <code>NoteNote</code> can still be reused.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All group tags created in <code>DefineTagCommand</code> will be lost once the instance of <code>NoteNote</code> is closed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Harder to implement, can be considered for future version in v2.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="add-tag-feature"><a class="link" href="#add-tag-feature">3.7. Add Tag feature</a></h3>
+<div class="paragraph">
+<p>The <code>addtag</code> feature allows users to apply existing group tag to multiple tasks. It should be used in conjunction with <code>definetag</code> feature. It requires users to do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to a project first with <code>select</code> command before executing the <code>addtag</code> command</p>
+</li>
+<li>
+<p>Add only an existing group tag defined previously at <code>definetag</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Failure to do any of the above would trigger an error message prompting users to do so.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>addtag</code> feature allows users to apply existing group tag to multiple tasks. It should be used in conjuction with <code>definetag</code> feature.</p>
+<p>The <code>addTag</code> feature obtains the target task from <code>FilteredTaskList</code> based on the task index given by the user. It then adds the child tags associated to the group tag defined previously at <code>definetag</code> into the task.</p>
 </div>
 <div class="paragraph">
-<p>Step 1: User selects task index and its favoured group tag with <code>addtag</code>. <code>AddTagCommandParser</code> parses the arguements and return them <code>AddTagCommand#AddTagCommand()</code></p>
+<p>Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VersionedProject#commit()</code> — Saves the current project state in its history</p>
+</li>
+<li>
+<p><code>VersionedProjectList#commit()</code> — Saves the current project list state in its history</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Step 2: <code>AddTagCommand</code> gets a updated task list with <code>Model#getFilteredTaskList()</code> and iterate to add tags in the <code>GroupTag</code> object to chosen task.</p>
+<p>These operations are exposed in the Model interface as <code>Model#commitProject()</code> and <code>Model#commitProjectList()</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application. <code>projectList</code> will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user selects a project. <code>setProject()</code> is invoked based on <code>Model#filteredProjectList</code>, and the tasks for that project are displayed via invoking <code>Model#filteredTaskList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3: User applies the group tag and its associated child tags in the selected task by entering <code>addtag</code>. The following operations are carried out:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddTagCommandParser</code> parses the arguments and return them <code>AddTagCommand#AddTagCommand()</code></p>
+</li>
+<li>
+<p><code>lastShownList</code> of all tasks in the current project is obtained from <code>Model</code> using <code>getFilteredTaskList()</code></p>
+</li>
+<li>
+<p>Two identical tasks, <code>targetTask</code> and <code>taskToAdd</code> are created based on <code>lastShownList</code> using the index from user&#8217;s input.</p>
+</li>
+<li>
+<p><code>AddTagCommand</code> will then call <code>Model#getGroupTagList</code> which returns a list of all group tags. Names from the list of group tags will be iterated and checked if it matches the name given by user&#8217;s input.</p>
+</li>
+<li>
+<p>Tags in the group tag will be added <code>taskToAdd</code> if the checks passes.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the Add Tag operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddTagSequenceDiagram.png" alt="AddTagSequenceDiagram" width="900">
+</div>
+<div class="title">Figure 16. Sequence Diagram for <code>addtag</code> Command</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Results is stored.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Two designs was considered for the implementation of <code>definetag</code>. The pros and cons of the designs are listed in the table below
+and our <strong>chosen option is Alternative 1</strong></p>
 </div>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags in group tag are added to the task by a separate command and remain visible in Task List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addTagCommand</code> to be incoperated in <code>addCommand</code> directly. (i.e. users can add a group tag into a task via the existing <code>add</code> and <code>edit</code> command with <code>gt/GROUPTAG</code> as a parameter)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to implement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Better user experience by utilizing existing command that users are already familiar with.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Might be confusing to users since tags are usually added via <code>add</code> or <code>edit</code> commands</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Harder to implement, can be considered for future version in v2.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1205,7 +1364,7 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <div class="content">
 <img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="900">
 </div>
-<div class="title">Figure 14. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
+<div class="title">Figure 17. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 12) is an example usage scenario of how the Task History mechanism behaves.</p>
@@ -1218,7 +1377,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 <div class="content">
 <img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="900">
 </div>
-<div class="title">Figure 15. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
+<div class="title">Figure 18. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
 </div>
 <div class="paragraph">
 <p>Note the behaviour when a <code>edit</code> command  is called (Figure 13). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
@@ -1231,7 +1390,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 <div class="content">
 <img src="images/taskhistoryseq.png" alt="taskhistoryseq" width="900">
 </div>
-<div class="title">Figure 16. Sequence Diagram for <code>taskhistory</code> Command</div>
+<div class="title">Figure 19. Sequence Diagram for <code>taskhistory</code> Command</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 14) is the sequence diagram when <code>taskhistory</code> is called.</p>
@@ -1346,7 +1505,7 @@ Additionally, it implements the following operations:</p>
 <div class="content">
 <img src="images/Completed.png" alt="Completed" width="800" height="]">
 </div>
-<div class="title">Figure 17. Sequence Diagram for <code>completed</code> Command</div>
+<div class="title">Figure 20. Sequence Diagram for <code>completed</code> Command</div>
 </div>
 <div class="paragraph">
 <p>Step 4. The user goes back to project level using <code>listproject</code>. <code>setProject</code> is invoked to sync <code>VersionedProject</code> with <code>VersionedProjectList</code>.</p>
@@ -1377,7 +1536,7 @@ Additionally, it implements the following operations:</p>
 <div class="content">
 <img src="images/Analyse.png" alt="Analyse" width="800" height="]">
 </div>
-<div class="title">Figure 18. Sequence Diagram for <code>analyse</code> Command</div>
+<div class="title">Figure 21. Sequence Diagram for <code>analyse</code> Command</div>
 </div>
 </div>
 <div class="sect3">
@@ -1573,7 +1732,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 19. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 22. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2508,9 +2667,6 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="importing-projects"><a class="link" href="#importing-projects">F.3. Importing projects</a></h3>
@@ -2585,5 +2741,118 @@ Expected: Selected project and its tasks will be exported to specified JSON file
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="list-tags"><a class="link" href="#list-tags">F.5. List tags</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>List all tags and their associated tasks.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>At least one task should exist in project list</p>
+</li>
+<li>
+<p>Users should have already nagivated to task level</p>
+</li>
+</ul>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 08:50:57 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Test case: <code>listtag</code><br>
+Expected: All tags and their associated tasks are displayed at the Result box. Users may need to scroll down to see the full list</p>
+</li>
+<li>
+<p>Test case: <code>listtag x</code> (where x is anything after <code>listtag</code>)<br>
+Expected: X is ignored and all tags and their associated tasks are displayed at the Result box. Users may need to scroll down to see the full list.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="define-tags"><a class="link" href="#define-tags">F.6. Define tags</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create new group tag</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: At least one project should exist in project list</p>
+</li>
+<li>
+<p>Test case: <code>definetag gt/Close Milestone t/ReleaseJar t/SubmitReport</code><br>
+Expected: "Group tag created: Close Milestone" will be displayed at the Result box.</p>
+</li>
+<li>
+<p>Test case: <code>definetag gt/Consultation t/PrepareDemo t/PrepareQuestions</code><br>
+Expected: "Group tag created: Consultation" will be displayed at the Result box.</p>
+</li>
+<li>
+<p>Test case: <code>definetag gt/Consultation gt/name2 t/PrepareDemo t/PrepareQuestions</code><br>
+Expected: "Group tag created: name2" will be displayed at the Result box.</p>
+</li>
+<li>
+<p>Test case: <code>definetag gt/duplicatename t/differenttag</code><br>
+Expected: No group tag will be created and the Result box will display "Group tag Consultation already exists in the group tag list" error.</p>
+</li>
+<li>
+<p>Other incorrect import commands to try: <code>definetag</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-tags"><a class="link" href="#add-tags">F.7. Add tags</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add group tag to task</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>At least one task should exist in project list</p>
+</li>
+<li>
+<p>Users should have already nagivated to task level</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>addtag 1 gt/Consultation</code><br>
+Expected: Task box will show the updated task with newly added tags from the Consultation group tag.</p>
+</li>
+<li>
+<p>Test case: <code>addtag 1 gt/Consultation gt/ExtraGroup</code><br>
+Expected: Task box will show the updated task with newly added tags from the ExtraGroup group tag.</p>
+</li>
+<li>
+<p>Test case: <code>addtag 1 gt/NonExistentTag</code><br>
+Expected: No group tag will be applied to task and the Result box will display "Group tag NonExistentTag not found, please use definetag to add them first." error.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>addtag</code>, <code>addtag x gt/Consultation</code> (where x is not a valid index)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 10:37:39 UTC</div></div></div></body></html>

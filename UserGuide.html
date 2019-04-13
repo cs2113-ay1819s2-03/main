@@ -382,7 +382,7 @@ If the <strong>immediate predecessor command</strong> is <code>listproject</code
 However, group tag created exists for the entire NoteNote instance and will be lost once the user exits.</p>
 </div>
 <div class="paragraph">
-<p>After defining a group tag, use the addtag command to add a group tag to a task of your choice.</p>
+<p>After defining a group tag, use the <code>addtag</code> command to add a group tag to a task of your choice. Note that duplicated group tags cannot be created.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -400,12 +400,18 @@ However, group tag created exists for the entire NoteNote instance and will be l
 <div class="ulist">
 <ul>
 <li>
-<p><code>definetag gt/Consultation t/Prepare demo t/Prepare questions</code></p>
+<p><code>definetag gt/Consultation t/PrepareDemo t/PrepareQuestions</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Outcome: A group tag called Consultation will be created which would contain tags Prepare demo and Prepare questions.</p>
+<p>Outcome: A group tag called Consultation will be created which would contain tags PrepareDemo and PrepareQuestions.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterDefineTag.png" alt="AfterDefineTag" width="800">
+</div>
+<div class="title">Figure 1. After excuting <code>definetag</code></div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -426,6 +432,9 @@ However, group tag created exists for the entire NoteNote instance and will be l
 <p><code>definetag gt/sample t/TAG0</code></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In situations where users input <code>definetag gt/sample1 gt/sample2 t/TAG</code>, only the last group tag parameter (i.e. <code>gt/sample2</code>) will be accepted.</p>
 </div>
 </td>
 </tr>
@@ -476,16 +485,14 @@ The full path to the JSON file has to be specified unless the file is contained 
 </table>
 </div>
 <div class="paragraph">
-<p>Outcome: Command box will display number of projects added to project list. Projects and tasks contained in JSON file will be imported and added to current project list.</p>
-</div>
-<div class="paragraph">
-<p>Refer to diagrams below on what NoteNote will display before and after successful execution of <code>import</code>.</p>
+<p>Outcome: Command box will display number of projects added to project list. Projects and tasks contained in JSON file will be imported and added to current project list.
+Refer to diagrams below on what NoteNote will display before and after successful execution of <code>import</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/BeforeImportCommand.png" alt="BeforeImportCommand" width="600">
 </div>
-<div class="title">Figure 1. Before executing <code>import</code></div>
+<div class="title">Figure 2. Before executing <code>import</code></div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -494,7 +501,7 @@ The full path to the JSON file has to be specified unless the file is contained 
 <div class="content">
 <img src="images/AfterImportCommand.png" alt="AfterImportCommand" width="600">
 </div>
-<div class="title">Figure 2. After executing <code>import</code></div>
+<div class="title">Figure 3. After executing <code>import</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -561,7 +568,7 @@ Output path should be explicitly specified unless the output is to be within the
 <div class="content">
 <img src="images/AfterExportCommand.png" alt="AfterExportCommand" width="600">
 </div>
-<div class="title">Figure 3. After executing <code>export</code></div>
+<div class="title">Figure 4. After executing <code>export</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -586,7 +593,7 @@ Output path should be explicitly specified unless the output is to be within the
 <div class="content">
 <img src="images/AnalyseOutcome.png" alt="AnalyseOutcome" width="600">
 </div>
-<div class="title">Figure 4. Example Outcome for <code>analyse</code> command</div>
+<div class="title">Figure 5. Example Outcome for <code>analyse</code> command</div>
 </div>
 <div class="paragraph">
 <p>Results Box (Panel B) will display number of completed tasks for each project, and percentage of each project completed, as shown in the above figure.</p>
@@ -699,6 +706,12 @@ A task can have any number of tags (including 0).
 </div>
 <div class="paragraph">
 <p>Outcome: Task Box (Panel D) will show the updated task with newly added tags.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterAddTag.png" alt="AfterAddTag" width="600">
+</div>
+<div class="title">Figure 6. After executing <code>addtag</code></div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -886,6 +899,12 @@ Tasks matching at least one keyword will be returned (i.e. <code>OR</code> searc
 <div class="paragraph">
 <p>Outcome: Result Box (Panel B) will will display all unique tags and associated tasks within a project.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterListTag.png" alt="AfterListTag" width="800">
+</div>
+<div class="title">Figure 7. After executing <code>listtag</code></div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="deleting-a-task-code-delete-code"><a class="link" href="#deleting-a-task-code-delete-code">6.2.8. Deleting a task: <code>delete</code></a></h4>
@@ -976,7 +995,7 @@ Completed tasks will be used as statistics for the <code>analyse</code> feature,
 <div class="content">
 <img src="images/CompletedOutcome.png" alt="CompletedOutcome" width="600">
 </div>
-<div class="title">Figure 5. Example Outcome for <code>completed</code> command</div>
+<div class="title">Figure 8. Example Outcome for <code>completed</code> command</div>
 </div>
 <div class="paragraph">
 <p>Task Box (Panel D) will display a <code>completed</code> tag for the first task, as shown in the above figure.</p>
@@ -1212,7 +1231,7 @@ thus <code>taskhistory</code> will no longer work as intended when you return to
 <div class="content">
 <img src="images/taskhistorysample.png" alt="taskhistorysample" width="900">
 </div>
-<div class="title">Figure 6. Example Outcome for <code>taskhistory</code> command</div>
+<div class="title">Figure 9. Example Outcome for <code>taskhistory</code> command</div>
 </div>
 <div class="paragraph">
 <p>Results Box (Panel B) will display all previous commands which directly
@@ -1291,7 +1310,7 @@ thus <code>compare</code> will no longer work as intended when you return to vie
 <div class="content">
 <img src="images/comparesample.png" alt="comparesample" width="900">
 </div>
-<div class="title">Figure 7. Example Outcome for <code>compare</code> command</div>
+<div class="title">Figure 10. Example Outcome for <code>compare</code> command</div>
 </div>
 <div class="paragraph">
 <p>Task Box (Panel B) will display information of current version of the task at
@@ -1473,4 +1492,4 @@ thus <code>compare</code> will no longer work as intended when you return to vie
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 08:50:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 10:37:39 UTC</div></div></div></body></html>
