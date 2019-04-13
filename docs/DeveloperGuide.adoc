@@ -691,6 +691,7 @@ Given below is an example usage scenario and how the completed/analyse mechanism
 
 Step 1. The user launches the application. `projectList` will be populated by invoking `StorageManager#readProjectList`.
 
+
 Step 2. The user selects a project. `setProject()` is invoked based on `filteredProjectList`, and the tasks for that project are displayed via invoking `filteredTaskList`.
 
 Step 3. The user marks a task as completed by entering `completed` followed by the index of the task.
