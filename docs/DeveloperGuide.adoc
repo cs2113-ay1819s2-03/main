@@ -514,9 +514,9 @@ Step 2: `AddTagCommand` gets a updated task list with `Model#getFilteredTaskList
 // end::addtag[]
 
 // tag::taskhistory[]
-=== View Task Edit History Feature
+=== View Task Command History Feature
 
-View task edit history allows the user to view a list of all the edit history of a chosen task.
+Allows the user to view a list of all the command history of a chosen task.
 
 ==== Current Implementation
 
@@ -1041,23 +1041,6 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1071,15 +1054,13 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample projects and task. The window size may not be optimum.
 
 . Saving window preferences
 
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
-
-_{ more test cases ... }_
 
 === Deleting a task
 
@@ -1092,8 +1073,6 @@ _{ more test cases ... }_
    Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Importing projects
 
@@ -1124,3 +1103,32 @@ _{ more test cases ... }_
    Expected: Selected project and its tasks will be exported to specified JSON file.
 .. Other incorrect export commands to try: `export`
 
+=== Compare Task
+
+. Compare a task which was previously edited
+
+.. Prerequisites: The task must exist. `edit` command should be executed on the selected task before and there must be a change in one or more of the following: name, deadline or description.
+.. Test case: `compare 1` +
+Expected: Task at index 1 will be being compared against the version before it was edited on. Showing you the differences of what was edited.
+.. Other incorrect export commands to try: `compare x` where `x` is an index out of bounds or not a number but a string.
+
+. Compare a task which was previously *not* edited
+.. Prerequisites: The task must exist. The selected task should not be edited before.
+.. Test case: `compare 1` +
+Expected: Task at index 1 will be being compared against the version before it was edited on. Since there is no previous version of it.
+.. Other incorrect export commands to try: `compare x` where `x` is an index out of bounds or not a number but a string.
+
+=== Task History
+
+. View the command history for a specific task where `edit`/`completed`/`addtag`/`delete` has been executed before.
+.. Prerequisites: The task must exist. `edit`/`completed`/`addtag`/`delete` command should be executed on the selected task before.
+.. Test case: `taskhistory 1` +
+Expected: A list of commands (`edit`/`completed`/`addtag`/`delete`) previously entered for the select task will be shown. Latest command will be on top
+while oldest command will be at the bottom.
+.. Other incorrect export commands to try: `taskhistory x` where `x` is an index out of bounds or not a number but a string.
+
+. View the command history for a specific task where `edit`/`completed`/`addtag`/`delete` has *not* been executed before.
+.. Prerequisites: The task must exist. `edit`/`completed`/`addtag`/`delete` command should *not* have executed on the selected task before.
+.. Test case: `compare 1`
+Expected:  Since `edit`/`completed`/`addtag`/`delete` has not been executed on the task before, "You have not yet entered any commands for this task." will be shown.
+.. Other incorrect export commands to try: `taskhistory x` where `x` is an index out of bounds or not a number but a string.

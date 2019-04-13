@@ -512,10 +512,12 @@ chronological order.
 * Format: `taskhistory INDEX`
 * Alias: `th` i.e. `taskhistory` is equivalent to `th`
 
-****
-* Take note that if you `listproject`, the history of commands will be cleared,
-thus `taskhistory` will no longer work as intended when you return to view the project tasks.
-****
+[NOTE]
+ Take note that if you `listproject`, the history of commands will be cleared,
+thus `taskhistory` will no longer work as intended when you return to view the project tasks. +
+[TIP]
+ Only `edit`/`completed`/`addtag`/`delete` commands will be recorded
+
 
 Example :
 
