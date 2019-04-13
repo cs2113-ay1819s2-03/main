@@ -10,24 +10,43 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>NoteNote is a desktop project application used for managing multiple projects and tasks. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>NoteNote is a desktop project application used for managing multiple projects and tasks (refer to Figure 1).<br>
+It is convenient and easy to use as the user just needs to type one-liner commands (using a Command Line Interface).<br>
+Besides adding projects and tasks, users can also organise them with different tags of their choice, and track their progress along the way as well.<br>
+This application was developed by my other four team members and I for CS2113T, an NUS module.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DemoLayout.png" alt="DemoLayout" width="790">
+</div>
+<div class="title">Figure 1. NoteNote&#8217;s interface</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>This section contains the breakdown of my contributions to this application.</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to mark tasks as completed</strong></p>
+<p><strong>Major enhancement</strong>: Added <strong>the ability to mark tasks as completed</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to mark specific tasks as completed by displaying a <code>completed</code> tag for each of those tasks. This can be reversed by using the undo command.</p>
+<p>What it does: It allows the user to mark specific tasks as completed by displaying a <code>completed</code> tag for each of those tasks (refer to Figure 2).</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can conveniently check off tasks that are completed, which ties in with the task-management purpose of this project.</p>
+<p>Justification: This feature improves the product significantly because a user can conveniently check off tasks that are completed, which ties in with the main purpose of this application, i.e. task management.</p>
 </li>
 <li>
 <p>Highlights: This enhancement required a different implementation from <code>edit</code> as it was more specialised and only affected the tags of a task. Any tasks marked as completed would also have to be retained in Storage, to complement the <code>analyse</code> feature.</p>
@@ -35,15 +54,25 @@
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to analyse all completed tasks</strong></p>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CompletedOutcome.png" alt="CompletedOutcome" width="600">
+</div>
+<div class="title">Figure 2. <code>completed</code> tag (in pink) is displayed for a completed task</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to see which tasks in a specific project have been completed already, so as to track the user&#8217;s progress on that project.</p>
+<p><strong>Major enhancement</strong>: Added <strong>the ability to analyse all completed tasks</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: It allows the user to see at one glance how many tasks in each project have been completed, as well as the percentage completed for each project (refer to Figure 3).</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can conveniently check off tasks that are completed, which ties in with the task-management purpose of this project.</p>
+<p>Justification: This feature allows the user to effortlessly track their progress across multiple projects by displaying clear and easily understood statistics.</p>
 </li>
 <li>
 <p>Highlights: This enhancement required additional implementations as the current <code>find</code> command could only search through names of tasks, but <code>analyse</code> needed to search through tags instead and present the results as a countable statistic.</p>
@@ -51,9 +80,29 @@
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AnalyseOutcome.png" alt="AnalyseOutcome" width="790">
+</div>
+<div class="title">Figure 3. Statistics produced as a result of <code>analyse</code></div>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><strong>Minor enhancement</strong>: added command aliases that allow the user to cut down the amount of typing to execute any command.</p>
+<p><strong>Minor enhancement</strong>: Added <strong>command aliases</strong> that allow the user to <strong>cut down the amount of typing</strong> to execute any command (refer to Figure 4).</p>
 </li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CmdAlias.png" alt="CmdAlias" width="600">
+</div>
+<div class="title">Figure 4. <code>completed</code> command (left) versus its shorthand alias (right)</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=rachellim10">Functional code</a>]</p>
 </li>
@@ -76,10 +125,23 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide</p>
+<p>Updated the User Guide and Developer Guide to include my new features</p>
 </li>
 <li>
-<p>Did cosmetic tweaks to existing contents of the Developer Guide</p>
+<p>Did cosmetic tweaks to existing contents of the User Guide and Developer Guide</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Review pull requests weekly (see <a href="https://github.com/CS2113-AY1819S2-T09-3/main/pulls?q=is%3Apr+reviewed-by%3Arachellim10">here</a>)</p>
+</li>
+<li>
+<p>Reported bugs and gave suggestions for other group’s project (Issues <a href="https://github.com/cs2113-ay1819s2-t08-2/main/issues/59">#59</a>, <a href="https://github.com/cs2113-ay1819s2-t08-2/main/issues/64">#64</a>, <a href="https://github.com/cs2113-ay1819s2-t08-2/main/issues/69">#69</a>, <a href="https://github.com/cs2113-ay1819s2-t08-2/main/issues/72">#72</a>, <a href="https://github.com/cs2113-ay1819s2-t08-2/main/issues/73">#73</a>, <a href="https://github.com/cs2113-ay1819s2-t08-2/main/issues/78">#78</a>)</p>
 </li>
 </ul>
 </div>
@@ -104,6 +166,84 @@
 </tr>
 </tbody>
 </table>
+<div class="sect3">
+<h4 id="completing-a-task-code-completed-code"><a class="link" href="#completing-a-task-code-completed-code">Completing a task: <code>completed</code></a></h4>
+<div class="paragraph">
+<p>Marks the specified task identified by the index number used in the displayed task list as completed by adding a <code>completed</code> tag to it.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>completed INDEX</code></p>
+</li>
+<li>
+<p>Alias: <code>cpt</code>, i.e. <code>completed</code> is equivalent to <code>cpt</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Completed tasks will be used as statistics for the <code>analyse</code> feature, unlike deleted tasks.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>completed 1</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CompletedOutcome.png" alt="CompletedOutcome" width="600">
+</div>
+<div class="title">Figure 5. Example Outcome for <code>completed</code> command</div>
+</div>
+<div class="paragraph">
+<p>Task Box (Panel D) will display a <code>completed</code> tag for the first task, as shown in the above figure.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="analyse-progress-of-all-projects-code-analyse-code"><a class="link" href="#analyse-progress-of-all-projects-code-analyse-code">Analyse progress of all projects: <code>analyse</code></a></h4>
+<div class="paragraph">
+<p>View number of completed tasks for each project, and percentage of each project completed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>analyse</code></p>
+</li>
+<li>
+<p>Alias: <code>an</code>, i.e. <code>analyse</code> is equivalent to <code>an</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AnalyseOutcome.png" alt="AnalyseOutcome" width="600">
+</div>
+<div class="title">Figure 6. Example Outcome for <code>analyse</code> command</div>
+</div>
+<div class="paragraph">
+<p>Results Box (Panel B) will display number of completed tasks for each project, and percentage of each project completed, as shown in the above figure.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -119,5 +259,194 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="completed-analyse-feature"><a class="link" href="#completed-analyse-feature">Completed/Analyse feature</a></h3>
+<div class="paragraph">
+<p>The <code>completed</code> feature allows for tasks to be marked as completed.<br>
+The <code>analyse</code> feature allows for viewing of statistics for each project, including:</p>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 05:18:28 UTC</div></div></div></body></html>
+<div class="ulist">
+<ul>
+<li>
+<p>Number of tasks completed for each project</p>
+</li>
+<li>
+<p>Percentage of each project completed</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>completed</code> feature obtains the target task from <code>FilteredTaskList</code> based on the task index given by the user, and adds a <code>completed</code> tag to it.<br>
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VersionedProject#commit()</code> — Saves the current project state in its history</p>
+</li>
+<li>
+<p><code>VersionedProjectList#commit()</code> — Saves the current project list state in its history</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the Model interface as <code>Model#commitProject()</code> and <code>Model#commitProjectList()</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the completed/analyse mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application. <code>projectList</code> will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user selects a project. <code>setProject()</code> is invoked based on <code>filteredProjectList</code>, and the tasks for that project are displayed via invoking <code>filteredTaskList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user marks a task as completed by entering <code>completed</code> followed by the index of the task.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>lastShownList</code> of all tasks in the current project is obtained from <code>Model</code> using <code>getFilteredTaskList()</code>.</p>
+</li>
+<li>
+<p>Two identical tasks, <code>targetTask</code> and <code>taskToComplete</code>, are created based on <code>lastShownList</code> using the index from user input.</p>
+</li>
+<li>
+<p>Tags of <code>taskToComplete</code> are obtained using <code>getTags()</code> and checked if they contain a <code>completed</code> tag. If it does not, this indicates that the task has not been completed yet, and a <code>completed</code> tag will be added.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the completed operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Completed.png" alt="Completed" width="800" height="]">
+</div>
+<div class="title">Figure 7. Sequence Diagram for <code>completed</code> Command</div>
+</div>
+<div class="paragraph">
+<p>Step 4. The user goes back to project level using <code>listproject</code>. <code>setProject</code> is invoked to sync <code>VersionedProject</code> with <code>VersionedProjectList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. The user enters <code>analyse</code> to view statistics of all the projects.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>filteredProjects</code> is obtained from <code>getFilteredProjectList()</code>.</p>
+</li>
+<li>
+<p>For each project in <code>filteredProjects</code>, <code>filteredTasks</code> is obtained from <code>getTaskList()</code>.</p>
+</li>
+<li>
+<p>For each task in <code>filteredTasks</code>, <code>getTags()</code> is invoked to check if the task has a <code>completed</code> tag.</p>
+</li>
+<li>
+<p>The result returned is the number of tasks completed in each project, and the percentage of each project completed.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the analyse operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Analyse.png" alt="Analyse" width="800" height="]">
+</div>
+<div class="title">Figure 8. Sequence Diagram for <code>analyse</code> Command</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-implementation-of-code-completed-code-feature"><a class="link" href="#aspect-implementation-of-code-completed-code-feature">Aspect: Implementation of <code>completed</code> feature</a></h5>
+<div class="paragraph">
+<p>Two designs were considered for the implementation of <code>completed</code>. The pros and cons of the designs are listed in the table below
+and our <strong>chosen option is Alternative 1</strong>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>completed</code> tag added to task, which remains visible in Task List.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Task saved to Storage and removed from display in Task List.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adding a specific tag to the existing task can be done using existing <code>addTag()</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DeleteCommand</code> can be used to delete task from Task List.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Completed task needed to be updated in Task List and Project List.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage needs to keep track of all the completed tasks and be able to separate them based on the projects they were under.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong><br>
+This option allows for the user to still be able to view which tasks have been completed, which helps to gauge their own progress.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Two designs were considered for the implementation of <code>analyse</code>. The pros and cons of the designs are listed in the table below
+and our <strong>chosen option is Alternative 2</strong>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>analyse</code> can only display statistics for one project at a time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>analyse</code> can display statistics for all project at one go.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easier as only need to iterate through one project&#8217;s tasks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User can easily view progress on all projects with one command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User will need to select each project and call <code>analyse</code> separately.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">More complicated as need to iterate through all tasks in all projects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong><br>
+User will experience greater convenience and ease of use if one command can display statistics across all projects.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 06:02:23 UTC</div></div></div></body></html>

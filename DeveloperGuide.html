@@ -36,7 +36,7 @@
 <li><a href="#define-tag-feature">3.6. Define Tag feature</a></li>
 <li><a href="#add-tag-feature">3.7. Add Tag feature</a></li>
 <li><a href="#view-task-edit-history-feature">3.8. View Task Edit History Feature</a></li>
-<li><a href="#proposed-calendar-view">3.9. [Proposed] Calendar View</a></li>
+<li><a href="#completed-analyse-feature">3.9. Completed/Analyse feature</a></li>
 <li><a href="#logging">3.10. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
 </ul>
@@ -1278,75 +1278,191 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-calendar-view"><a class="link" href="#proposed-calendar-view">3.9. [Proposed] Calendar View</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As of v1.2, this feature is still in the process of implementation.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.9.1. Proposed Implementation</a></h4>
+<h3 id="completed-analyse-feature"><a class="link" href="#completed-analyse-feature">3.9. Completed/Analyse feature</a></h3>
 <div class="paragraph">
-<p>The calendar leverages on the Google calendar API to enable this feature. A sample usage, along with the behaviour of the calendar model at each step, is given below:</p>
+<p>The <code>completed</code> feature allows for tasks to be marked as completed.<br>
+The <code>analyse</code> feature allows for viewing of statistics for each project, including:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Step 1: The user launches the application and executes <code>add n/Decide on Research Paper Topic d/Security-related by/01/01/2020 t/cs3235</code>.<br></p>
+<p>Number of tasks completed for each project</p>
 </li>
 <li>
-<p>Step 2: The <code>AddCommandParser</code> parses out the strings for the name, description, deadline and tag.<br></p>
-</li>
-<li>
-<p>Step 3: <code>ParserUtil</code> checks that the input strings are valid, and initialises the <code>Name</code>, <code>Description</code>, <code>Deadline</code> and <code>Tag</code>.<br></p>
-</li>
-<li>
-<p>Step 4: A new <code>CalendarEvent</code> is initialised and will be displayed in the calendar GUI.</p>
+<p>Percentage of each project completed</p>
 </li>
 </ul>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.9.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>completed</code> feature obtains the target task from <code>FilteredTaskList</code> based on the task index given by the user, and adds a <code>completed</code> tag to it.<br>
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VersionedProject#commit()</code> — Saves the current project state in its history</p>
+</li>
+<li>
+<p><code>VersionedProjectList#commit()</code> — Saves the current project list state in its history</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the Model interface as <code>Model#commitProject()</code> and <code>Model#commitProjectList()</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the completed/analyse mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application. <code>projectList</code> will be populated by invoking <code>StorageManager#readProjectList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user selects a project. <code>setProject()</code> is invoked based on <code>filteredProjectList</code>, and the tasks for that project are displayed via invoking <code>filteredTaskList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user marks a task as completed by entering <code>completed</code> followed by the index of the task.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>lastShownList</code> of all tasks in the current project is obtained from <code>Model</code> using <code>getFilteredTaskList()</code>.</p>
+</li>
+<li>
+<p>Two identical tasks, <code>targetTask</code> and <code>taskToComplete</code>, are created based on <code>lastShownList</code> using the index from user input.</p>
+</li>
+<li>
+<p>Tags of <code>taskToComplete</code> are obtained using <code>getTags()</code> and checked if they contain a <code>completed</code> tag. If it does not, this indicates that the task has not been completed yet, and a <code>completed</code> tag will be added.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the completed operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Completed.png" alt="Completed" width="800" height="]">
+</div>
+<div class="title">Figure 17. Sequence Diagram for <code>completed</code> Command</div>
+</div>
+<div class="paragraph">
+<p>Step 4. The user goes back to project level using <code>listproject</code>. <code>setProject</code> is invoked to sync <code>VersionedProject</code> with <code>VersionedProjectList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. The user enters <code>analyse</code> to view statistics of all the projects.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>filteredProjects</code> is obtained from <code>getFilteredProjectList()</code>.</p>
+</li>
+<li>
+<p>For each project in <code>filteredProjects</code>, <code>filteredTasks</code> is obtained from <code>getTaskList()</code>.</p>
+</li>
+<li>
+<p>For each task in <code>filteredTasks</code>, <code>getTags()</code> is invoked to check if the task has a <code>completed</code> tag.</p>
+</li>
+<li>
+<p>The result returned is the number of tasks completed in each project, and the percentage of each project completed.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the analyse operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Analyse.png" alt="Analyse" width="800" height="]">
+</div>
+<div class="title">Figure 18. Sequence Diagram for <code>analyse</code> Command</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-navigation-of-calendar-feature"><a class="link" href="#aspect-navigation-of-calendar-feature">Aspect: Navigation of calendar feature</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Keyboard arrows (up, down, left, right) to toggle between dates.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to implement and fits the project direction of focusing on CLI.</p>
-</li>
-<li>
-<p>Cons: Less user-friendly to toggle to a date far in the future.</p>
-</li>
-</ul>
+<h5 id="aspect-implementation-of-code-completed-code-feature"><a class="link" href="#aspect-implementation-of-code-completed-code-feature">Aspect: Implementation of <code>completed</code> feature</a></h5>
+<div class="paragraph">
+<p>Two designs were considered for the implementation of <code>completed</code>. The pros and cons of the designs are listed in the table below
+and our <strong>chosen option is Alternative 1</strong>.</p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Keyboard arrows and scroll wheel.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: More user-friendly.</p>
-</li>
-<li>
-<p>Cons: More things to factor in during implementation, and possibly more issues as well.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>completed</code> tag added to task, which remains visible in Task List.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Task saved to Storage and removed from display in Task List.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adding a specific tag to the existing task can be done using existing <code>addTag()</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DeleteCommand</code> can be used to delete task from Task List.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Completed task needed to be updated in Task List and Project List.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage needs to keep track of all the completed tasks and be able to separate them based on the projects they were under.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong><br>
+This option allows for the user to still be able to view which tasks have been completed, which helps to gauge their own progress.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><br></p>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p>Two designs were considered for the implementation of <code>analyse</code>. The pros and cons of the designs are listed in the table below
+and our <strong>chosen option is Alternative 2</strong>.</p>
 </div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>analyse</code> can only display statistics for one project at a time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>analyse</code> can display statistics for all project at one go.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easier as only need to iterate through one project&#8217;s tasks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User can easily view progress on all projects with one command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User will need to select each project and call <code>analyse</code> separately.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">More complicated as need to iterate through all tasks in all projects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Choice</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong><br>
+User will experience greater convenience and ease of use if one command can display statistics across all projects.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1455,7 +1571,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 17. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 19. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2395,4 +2511,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 05:18:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 06:02:23 UTC</div></div></div></body></html>
