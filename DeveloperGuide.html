@@ -35,7 +35,7 @@
 <li><a href="#list-tag-feature">3.5. List Tag feature</a></li>
 <li><a href="#define-tag-feature">3.6. Define Tag feature</a></li>
 <li><a href="#add-tag-feature">3.7. Add Tag feature</a></li>
-<li><a href="#view-task-edit-history-feature">3.8. View Task Edit History Feature</a></li>
+<li><a href="#view-task-command-history-feature">3.8. View Task Command History Feature</a></li>
 <li><a href="#completed-analyse-feature">3.9. Completed/Analyse feature</a></li>
 <li><a href="#logging">3.10. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
@@ -73,18 +73,19 @@
 <li><a href="#use-cases">Appendix B: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix C: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix D: Glossary</a></li>
-<li><a href="#product-survey">Appendix E: Product Survey</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
+<li><a href="#instructions-for-manual-testing">Appendix E: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-task">F.2. Deleting a task</a></li>
-<li><a href="#importing-projects">F.3. Importing projects</a></li>
-<li><a href="#exporting-projects">F.4. Exporting projects</a></li>
-<li><a href="#list-tags">F.5. List tags</a></li>
-<li><a href="#define-tags">F.6. Define tags</a></li>
-<li><a href="#add-tags">F.7. Add tags</a></li>
-<li><a href="#completing-a-task">F.8. Completing a task</a></li>
-<li><a href="#analysing-projects">F.9. Analysing projects</a></li>
+<li><a href="#launch-and-shutdown">E.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-task">E.2. Deleting a task</a></li>
+<li><a href="#importing-projects">E.3. Importing projects</a></li>
+<li><a href="#exporting-projects">E.4. Exporting projects</a></li>
+<li><a href="#compare-task">E.5. Compare Task</a></li>
+<li><a href="#task-history">E.6. Task History</a></li>
+<li><a href="#list-tags">E.7. List tags</a></li>
+<li><a href="#define-tags">E.8. Define tags</a></li>
+<li><a href="#add-tags">E.9. Add tags</a></li>
+<li><a href="#completing-a-task">E.10. Completing a task</a></li>
+<li><a href="#analysing-projects">E.11. Analysing projects</a></li>
 </ul>
 </li>
 </ul>
@@ -98,7 +99,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>JDK <code>9</code></strong> or later</p>
+<p><strong>JDK <code>9</code></strong></p>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -919,17 +920,26 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/compareseq.png" alt="compareseq" width="700">
+</div>
+<div class="title">Figure 10. Sequence Diagram for <code>compare</code> Command</div>
+</div>
+<div class="paragraph">
+<p>Given above (Figure 10) is the sequence diagram when <code>compare</code> is called.</p>
+</div>
 <div class="paragraph">
 <p>These operations are exposed in the <code>Model</code> interface as <code>Model#compareTask()</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/compare1.png" alt="compare1" width="900">
+<img src="images/compare1.png" alt="compare1" width="700">
 </div>
-<div class="title">Figure 10. Example of VersionedProject when <code>edit</code> on Task B</div>
+<div class="title">Figure 11. Example of VersionedProject when <code>edit</code> on Task B</div>
 </div>
 <div class="paragraph">
-<p>Given above (Figure 8.) is an example usage scenario and how the Compare Task mechanism behaves.</p>
+<p>Given above (Figure 11.) is an example usage scenario and how the Compare Task mechanism behaves.</p>
 </div>
 <div class="paragraph">
 <p>Step 1. The user selects the task to compare by entering the index of the task that is shown. <code>CompareCommandParser#CompareCommand()</code> will then get the index of the task
@@ -943,13 +953,13 @@ within <code>projectStateList</code> and passed into <code>CompareCommand#Comman
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/compare2.png" alt="compare2" width="900">
+<img src="images/compare2.png" alt="compare2" width="700">
 </div>
-<div class="title">Figure 11. Process of how <code>compare</code> command will flow</div>
+<div class="title">Figure 12. Process of how <code>compare</code> command will flow</div>
 </div>
 <div class="paragraph">
 <p>Step 4. <code>VersionedProject#compareTask()</code> will iterate through all the the tasks within each project state. The <code>taskId</code>
-will be used to determine if the task encountered during the iteration is the same as the chosen task (Figure 9, A).</p>
+will be used to determine if the task encountered during the iteration is the same as the chosen task (Figure 12, A).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -965,17 +975,17 @@ that is encountered, "Nothing to compare" will be showed to the user.
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description &amp; deadline (Figure 9, B).</p>
+<p>Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description &amp; deadline (Figure 12, B).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/compare%203.png" alt="compare 3" width="800">
+<img src="images/compare%203.png" alt="compare 3" width="400">
 </div>
-<div class="title">Figure 12. A successful <code>compare</code> where name is different</div>
+<div class="title">Figure 13. A successful <code>compare</code> where name is different</div>
 </div>
 <div class="paragraph">
-<p>Step 6. If there is a difference in any of the fields in the comparison (Figure 10), the difference will be showed to the user.
-Else Step 4. will continue to run to look for another version of the chosen task to compare (Figure 9, C).</p>
+<p>Step 6. If there is a difference in any of the fields in the comparison (Figure 13), the difference will be showed to the user.
+Else Step 4. will continue to run to look for another version of the chosen task to compare (Figure 12, C).</p>
 </div>
 </div>
 <div class="sect3">
@@ -1018,18 +1028,6 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect3">
-<h4 id="sequence-diagram-code-compare-code"><a class="link" href="#sequence-diagram-code-compare-code">3.3.3. Sequence Diagram (<code>compare</code>)</a></h4>
-<div class="imageblock">
-<div class="content">
-<img src="images/compareseq.png" alt="compareseq" width="900">
-</div>
-<div class="title">Figure 13. Sequence Diagram for <code>compare</code> Command</div>
-</div>
-<div class="paragraph">
-<p>Given above (Figure 11) is the sequence diagram when <code>compare</code> is called.</p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1324,17 +1322,24 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-task-edit-history-feature"><a class="link" href="#view-task-edit-history-feature">3.8. View Task Edit History Feature</a></h3>
+<h3 id="view-task-command-history-feature"><a class="link" href="#view-task-command-history-feature">3.8. View Task Command History Feature</a></h3>
 <div class="paragraph">
-<p>View task edit history allows the user to view a list of all the edit history of a chosen task.</p>
+<p>Allows the user to view a list of all the command history of a chosen task.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Stores a parallel list <code>userInputHistoryTaskId</code> along <code>userInputHistory</code>, containing the taskId of <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> commands.</p>
+<p>Stores a parallel list <code>userInputHistoryTaskId</code> along <code>userInputHistory</code>, containing the taskId of <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> commands.
+The list will store <code>0</code> for all other commands.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/taskhistoryseq.png" alt="taskhistoryseq" width="700">
+</div>
+<div class="title">Figure 17. Sequence Diagram for <code>taskhistory</code> Command</div>
 </div>
 <div class="paragraph">
-<p>The list will store <code>0</code> for all other commands.</p>
+<p>Given above (Figure 14) is the sequence diagram when <code>taskhistory</code> is called.</p>
 </div>
 <div class="paragraph">
 <p>It is facilitated by <code>CommandHistory</code> and implements the following operations:</p>
@@ -1342,44 +1347,50 @@ and our <strong>chosen option is Alternative 1</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>CommandHistory#addHistoryTaskId()</code>&#8201;&#8212;&#8201;Adds taskId to the index that is the same as the <code>edit</code> command. Pads <code>0</code> for all other commands.</p>
+<p><code>CommandHistory#addHistoryTaskId()</code>&#8201;&#8212;&#8201;Adds taskId to the index that is the same as the <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> command. Pads <code>0</code> for all other commands.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Step 1. When <code>taskhistory</code> is executed, <code>CommandHistory#getHistory()</code>, <code>CommandHistory#getHistoryTaskId()</code> and <code>Task#getTaskId()</code> is called.
+Retrieving a list of <code>userInputHistory</code>, a list of <code>userInputHistoryTaskId</code> and the taskID of a task, <code>taskId</code></p>
+</div>
+<div class="paragraph">
+<p>Step 2. <code>userInputHistoryTaskId</code> will be iterated through.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 2a. If <code>taskId</code> of the selected task appears within <code>userInputHistoryTaskId</code>, the index at that position will be used
+to retrieve the command string within <code>userInputHistory</code>. The string will then be appended to a ArrayList&lt;string&gt;, <code>commandlist</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 3. If <code>commandList</code> is not empty, it will be printed in reverse order(newest command first, oldest command last) to the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="behaviour-when-commands-are-executed"><a class="link" href="#behaviour-when-commands-are-executed">3.8.2. Behaviour when commands are executed</a></h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="900">
+<img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="700">
 </div>
-<div class="title">Figure 17. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
-</div>
-<div class="paragraph">
-<p>Given above (Figure 12) is an example usage scenario of how the Task History mechanism behaves.</p>
+<div class="title">Figure 18. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour of useTaskHistoryTaskId when all other commands (not <code>edit</code>) is called (Figure 12). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
+<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 15). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
 However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="900">
+<img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="700">
 </div>
-<div class="title">Figure 18. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
+<div class="title">Figure 19. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour when a <code>edit</code> command  is called (Figure 13). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
+<p>Note the behaviour when a <code>edit</code> command  is called (Figure 16). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
 <code>edit</code> command is called on. Observe that positions of previous non-<code>edit</code> command will be filled with <code>0</code>. <code>userInputHistory</code> will still be updated as usual.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="sequence-diagram-code-taskhistory-code"><a class="link" href="#sequence-diagram-code-taskhistory-code">3.8.2. Sequence Diagram (<code>taskhistory</code>)</a></h4>
-<div class="imageblock">
-<div class="content">
-<img src="images/taskhistoryseq.png" alt="taskhistoryseq" width="900">
-</div>
-<div class="title">Figure 19. Sequence Diagram for <code>taskhistory</code> Command</div>
-</div>
-<div class="paragraph">
-<p>Given above (Figure 14) is the sequence diagram when <code>taskhistory</code> is called.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2503,7 +2514,7 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> or higher installed.</p>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> installed.</p>
 </li>
 <li>
 <p>Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.</p>
@@ -2512,9 +2523,6 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
 </div>
 </div>
 </div>
@@ -2536,44 +2544,7 @@ e.g. <code>seedu.project.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix E: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix E: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
@@ -2591,7 +2562,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">E.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2603,7 +2574,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample projects and task. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -2624,12 +2595,9 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-task"><a class="link" href="#deleting-a-task">F.2. Deleting a task</a></h3>
+<h3 id="deleting-a-task"><a class="link" href="#deleting-a-task">E.2. Deleting a task</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2658,7 +2626,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-projects"><a class="link" href="#importing-projects">F.3. Importing projects</a></h3>
+<h3 id="importing-projects"><a class="link" href="#importing-projects">E.3. Importing projects</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2686,7 +2654,7 @@ Expected: No new projects are added to the list as JSON file does not exists.</p
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-projects"><a class="link" href="#exporting-projects">F.4. Exporting projects</a></h3>
+<h3 id="exporting-projects"><a class="link" href="#exporting-projects">E.4. Exporting projects</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2731,7 +2699,90 @@ Expected: Selected project and its tasks will be exported to specified JSON file
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-tags"><a class="link" href="#list-tags">F.5. List tags</a></h3>
+<h3 id="compare-task"><a class="link" href="#compare-task">E.5. Compare Task</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Compare a task which was previously edited</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The task must exist. <code>edit</code> command should be executed on the selected task before and there must be a change in one or more of the following: name, deadline or description.</p>
+</li>
+<li>
+<p>Test case: <code>compare 1</code><br>
+Expected: Task at index 1 will be being compared against the version before it was edited on. Showing you the differences of what was edited.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>compare x</code> where <code>x</code> is an index out of bounds or not a number but a string.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Compare a task which was previously <strong>not</strong> edited</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The task must exist. The selected task should not be edited before.</p>
+</li>
+<li>
+<p>Test case: <code>compare 1</code><br>
+Expected: Task at index 1 will be being compared against the version before it was edited on. Since there is no previous version of it.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>compare x</code> where <code>x</code> is an index out of bounds or not a number but a string.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task-history"><a class="link" href="#task-history">E.6. Task History</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>View the command history for a specific task where <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> has been executed before.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The task must exist. <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> command should be executed on the selected task before.</p>
+</li>
+<li>
+<p>Test case: <code>taskhistory 1</code><br>
+Expected: A list of commands (<code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) previously entered for the select task will be shown. Latest command will be on top
+while oldest command will be at the bottom.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>taskhistory x</code> where <code>x</code> is an index out of bounds or not a number but a string.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View the command history for a specific task where <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> has <strong>not</strong> been executed before.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The task must exist. <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> command should <strong>not</strong> have executed on the selected task before.</p>
+</li>
+<li>
+<p>Test case: <code>compare 1</code>
+Expected:  Since <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code> has not been executed on the task before, "You have not yet entered any commands for this task." will be shown.</p>
+</li>
+<li>
+<p>Other incorrect export commands to try: <code>taskhistory x</code> where <code>x</code> is an index out of bounds or not a number but a string.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-tags"><a class="link" href="#list-tags">E.7. List tags</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2766,7 +2817,7 @@ Expected: X is ignored and all tags and their associated tasks are displayed at 
 </div>
 </div>
 <div class="sect2">
-<h3 id="define-tags"><a class="link" href="#define-tags">F.6. Define tags</a></h3>
+<h3 id="define-tags"><a class="link" href="#define-tags">E.8. Define tags</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2802,7 +2853,7 @@ Expected: No group tag will be created and the Result box will display "Group ta
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-tags"><a class="link" href="#add-tags">F.7. Add tags</a></h3>
+<h3 id="add-tags"><a class="link" href="#add-tags">E.9. Add tags</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2844,7 +2895,7 @@ Expected: No group tag will be applied to task and the Result box will display "
 </div>
 </div>
 <div class="sect2">
-<h3 id="completing-a-task"><a class="link" href="#completing-a-task">F.8. Completing a task</a></h3>
+<h3 id="completing-a-task"><a class="link" href="#completing-a-task">E.10. Completing a task</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2882,7 +2933,7 @@ Expected: No <code>completed</code> tag is added to any task in Task Box. Result
 </div>
 </div>
 <div class="sect2">
-<h3 id="analysing-projects"><a class="link" href="#analysing-projects">F.9. Analysing projects</a></h3>
+<h3 id="analysing-projects"><a class="link" href="#analysing-projects">E.11. Analysing projects</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2903,4 +2954,4 @@ Expected: Results Box displays "&lt;Name of project&gt;: x tasks completed. (Per
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 15:29:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 15:36:50 UTC</div></div></div></body></html>
