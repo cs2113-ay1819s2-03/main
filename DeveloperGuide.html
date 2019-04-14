@@ -1547,7 +1547,7 @@ The list will store <code>0</code> for all other commands.</p>
 <div class="title">Figure 19. Sequence Diagram for <code>taskhistory</code> Command</div>
 </div>
 <div class="paragraph">
-<p>Given above (Figure 17) is the sequence diagram when <code>taskhistory</code> is called.</p>
+<p>Given above (Figure 19) is the sequence diagram when <code>taskhistory</code> is called.</p>
 </div>
 <div class="paragraph">
 <p>It is facilitated by <code>CommandHistory</code> and implements the following operations:</p>
@@ -1587,7 +1587,7 @@ to retrieve the command string within <code>userInputHistory</code>. The string 
 <div class="title">Figure 20. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 18). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
+<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 20). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
 However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 <div class="imageblock">
@@ -1597,7 +1597,7 @@ However <code>userInputHistory</code> will still be updated as usual.</p>
 <div class="title">Figure 21. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour when a <code>edit</code> command  is called (Figure 19). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
+<p>Note the behaviour when a <code>edit</code> command  is called (Figure 21). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
 <code>edit</code> command is called on. Observe that positions of previous non-<code>edit</code> command will be filled with <code>0</code>. <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 </div>
@@ -3162,4 +3162,4 @@ Expected: Results Box displays "&lt;Name of project&gt;: x tasks completed. (Per
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 14:46:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 14:59:36 UTC</div></div></div></body></html>
