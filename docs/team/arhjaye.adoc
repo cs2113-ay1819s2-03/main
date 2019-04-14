@@ -71,8 +71,6 @@ Represents an additional information where if not taken into consideration, will
 Given below is a snippet of the User Guide documentation for my above listed enhancements.
 _You will be able to a look at my documenting abilities, to produce *concise guides* & being *audience focused*._
 
-include::../UserGuide.adoc[tag=UIlayout]
-
 include::../UserGuide.adoc[tag=compare]
 
 include::../UserGuide.adoc[tag=taskhistory]
@@ -84,6 +82,8 @@ _You will be able to a look at my technical documentation abilities, utilizing *
 diagrams* to explain complicated processes in *simpler terms*._
 
 include::../DeveloperGuide.adoc[tag=compare]
+
+include::../DeveloperGuide.adoc[tag=compare1]
 
 include::../DeveloperGuide.adoc[tag=taskhistory]
 

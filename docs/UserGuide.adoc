@@ -57,7 +57,7 @@ This is a note. These are things for you to take note of when using *NoteNote*.
 // tag::UIlayout[]
 === User Interface Layout
 
-image::applayout.png[width="790", title="Application interface"]
+image::applayout.png[width="500", title="Application interface"]
 
 * *Panel A: Command Box* - Where your commands will be typed
 * *Panel B: Results Box* - Displays result for the following commands: history, taskhistory, compare,  listtag; else displays either success / error message for all other commands.
@@ -575,7 +575,7 @@ Example :
 
 Outcome:
 
-image::taskhistorysample.png[width="900", title="Example Outcome for `taskhistory` command"]
+image::taskhistorysample.png[width="600", title="Example Outcome for `taskhistory` command"]
 
 Results Box (Panel B) will display all previous commands which directly
 affects the task at index 1 (Figure 13).
@@ -613,7 +613,7 @@ Outcome: Task Box (Panel D) will display updated task at index 1 with the new
 
 Outcome:
 
-image::comparesample.png[width="900", title="Example Outcome for `compare` command"]
+image::comparesample.png[width="600", title="Example Outcome for `compare` command"]
 
 Task Box (Panel B) will display information of current version of the task at
          index 1 ( _sample task_ ) and the previous version of it ( _sample task edited_ ) (Figure 14).
