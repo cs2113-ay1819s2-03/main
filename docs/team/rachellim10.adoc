@@ -60,6 +60,16 @@ image::CmdAlias.png[width="300", title="`completed` command (left) versus its sh
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+==== Icons Meaning
+
+Various icons are also used throughout this user guide with the following context:
+
+[TIP]
+This is a tip. Follow these suggested tips to make your life much simpler when using *NoteNote*.
+
+[NOTE]
+This is a note. These are things for you to take note of when using *NoteNote*.
+
 include::../UserGuide.adoc[tag=completed]
 
 include::../UserGuide.adoc[tag=analyse]
