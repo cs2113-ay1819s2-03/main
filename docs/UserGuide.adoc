@@ -582,6 +582,51 @@ Task Box (Panel B) will display information of current version of the task at
          Allows you to view a direct comparison of what was changed.
 // end::compare[]
 
+== Future Enhancements [coming in v2.0]
+
+==== Analyse progress of all projects: `analyse`
+
+Current `analyse` feature will show number of completed tasks for each project, and percentage of each project completed.
+
+Future enhancement of `analyse` will be more comprehensive, displaying *visual graphs, charts & tables*
+
+==== Undo per task `undotask`
+
+Current `undo` feature is a general execution on the overall commands that is executed.
+
+`undotask` will allow you to "undo" a command that is executed on the selected task.
+
+* Format: `undotask INDEX`
+
+Example :
+
+*  `edit 1 n/edited_name` ...
+
+Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the new edited name.
+
+*  `undotask 1`
+
+Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the previous name before the edit.
+
+==== Redo per task `redotask`
+
+Current `redo` feature is a general execution on the overall undo command that is executed.
+
+`redotask` will allow you to "redo" from a `undotask` that is executed on the selected task.
+
+* Format: `redotask INDEX`
+
+Example :
+
+*  `undotask 1`
+
+Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the previous name before the edit.
+
+*  `redotask 1`
+
+Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the name before `undotask` was executed.
+
+
 == FAQ
 
 *Q*: How do I transfer my data to another computer? +
