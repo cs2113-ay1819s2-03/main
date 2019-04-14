@@ -439,9 +439,11 @@ If no same tasks are found after iterating through all the project states, or if
 that is encountered, "Nothing to compare" will be showed to the user.
 
 Step 5. If the task encountered is the same as the chosen task, the 2 task will be compared against their name, description & deadline (Figure 12, B).
+// end::compare[]
 
 image::compare 3.png[width="400", title="A successful `compare` where name is different"]
 
+// tag::compare1[]
 Step 6. If there is a difference in any of the fields in the comparison (Figure 13), the difference will be showed to the user.
 Else Step 4. will continue to run to look for another version of the chosen task to compare (Figure 12, C).
 
@@ -466,7 +468,7 @@ and our *chosen option is Alternative 1*
 |*Implemented*
 |
 |===
-// end::compare[]
+// end::compare1[]
 
 // tag::list[]
 === List Feature
