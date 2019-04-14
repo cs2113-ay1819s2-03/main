@@ -16,6 +16,16 @@ Other than keeping track of your projects and tasks, NoteNote also allows you to
 .Application Layout
 image::DemoLayout.png[width="800"]
 
+== Icons used in this portfolio
+
+Throughout this portfolio, various icons are used to highlight certain information. Here's what they mean:
+
+[TIP]
+This is a tip. Follow these suggested tips to make your life much simpler when using *NoteNote*!
+
+[NOTE]
+This is a note. These are things for you to take note of when using *NoteNote*.
+
 == Summary of contributions
 My contributions to NoteNote consists of the implementation of the `import` and `export` feature and
 the refactoring required to morph the original AddressBook 4 application to NoteNote.
