@@ -17,6 +17,10 @@
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>My main contributions to NoteNote is the implementation of 2 of my features, <code>taskhistory</code> and <code>compare</code>.
+I have also contributed to the team by helping manage version releases and ensuring deliverables are met.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -24,16 +28,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows you to view a command history of a chosen task with the command <code>taskhistory</code>. The command history will include commands that have a direct impact on the task (e.g. <code>edit</code> / <code>completed</code> / <code>addtag</code> / <code>delete</code>)</p>
+<p><strong>What it does</strong>: allows you to view a command history of a chosen task with the command <code>taskhistory</code>. The command history will include commands that have a direct impact on the task (e.g. <code>edit</code> / <code>completed</code> / <code>addtag</code> / <code>delete</code>)</p>
 </li>
 <li>
-<p>Justification: Current implementation will only allow you to view the command history of every command (valid &amp; invalid) that has been entered.
+<p><strong>Justification</strong>: Current implementation will only allow you to view the command history of every command (valid &amp; invalid) that has been entered.
 But when handling multiple large projects, a user is bound to have numerous edits for the many task that is there.
 In this case the likelihood of a user forgetting / executing a wrong command is very probable. Thus, this feature allows a user
 to view a record of the changes he made for a specific task instead of viewing it as a whole project. Allowing easy referencing for a user.</p>
 </li>
 <li>
-<p>Highlights: This feature is implemented by creating another stack parallel to the existing command history stack. This new stack will contain the unique ID of a task corresponding
+<p><strong>Highlights</strong>: This feature is implemented by creating another stack parallel to the existing command history stack. This new stack will contain the unique ID of a task corresponding
 to the command of the same index in the command history.</p>
 </li>
 </ul>
@@ -44,13 +48,13 @@ to the command of the same index in the command history.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows you to view a direct comparison of a chosen task against its previous version before the edit with the command <code>compare</code></p>
+<p><strong>What it does</strong>: allows you to view a direct comparison of a chosen task against its previous version before the edit with the command <code>compare</code></p>
 </li>
 <li>
-<p>Justification: To allow easy referencing for a chosen task in a neater method as this feature compares the differences and will only show you the result of the field (Name / Description / Deadline) that was changed, instead of all the fields.</p>
+<p><strong>Justification</strong>: To allow easy referencing for a chosen task in a neater method as this feature compares the differences and will only show you the result of the field (Name / Description / Deadline) that was changed, instead of all the fields.</p>
 </li>
 <li>
-<p>Highlights: Current <code>undo</code> feature is implemented as general undo for all commands.
+<p><strong>Highlights</strong>: Current <code>undo</code> feature is implemented as general undo for all commands.
 This <code>compare</code> feature serves as a base for a future feature which allows <code>undo</code> for a specific task.</p>
 <div class="ulist">
 <ul>
@@ -185,6 +189,7 @@ Represents an additional information where if not taken into consideration, will
 <div class="content">
 <img src="../images/applayout.png" alt="applayout" width="790">
 </div>
+<div class="title">Figure 1. Application interface</div>
 </div>
 <div class="ulist">
 <ul>
@@ -294,11 +299,11 @@ If you <code>listproject</code>, the history of commands will be cleared,
 <div class="content">
 <img src="../images/comparesample.png" alt="comparesample" width="900">
 </div>
-<div class="title">Figure 1. Example Outcome for <code>compare</code> command</div>
+<div class="title">Figure 2. Example Outcome for <code>compare</code> command</div>
 </div>
 <div class="paragraph">
 <p>Task Box (Panel B) will display information of current version of the task at
-         index 1 ( <em>sample task</em> ) and the previous version of it ( <em>sample task edited</em> ) (Figure 7).
+         index 1 ( <em>sample task</em> ) and the previous version of it ( <em>sample task edited</em> ) (Figure 12).
          Allows you to view a direct comparison of what was changed.</p>
 </div>
 </div>
@@ -360,11 +365,11 @@ thus <code>taskhistory</code> will no longer work as intended when you return to
 <div class="content">
 <img src="../images/taskhistorysample.png" alt="taskhistorysample" width="900">
 </div>
-<div class="title">Figure 2. Example Outcome for <code>taskhistory</code> command</div>
+<div class="title">Figure 3. Example Outcome for <code>taskhistory</code> command</div>
 </div>
 <div class="paragraph">
 <p>Results Box (Panel B) will display all previous commands which directly
-affects the task at index 1 (Figure 6).</p>
+affects the task at index 1 (Figure 11).</p>
 </div>
 </div>
 </div>
@@ -395,9 +400,9 @@ diagrams</strong> to explain complicated processes in <strong>simpler terms</str
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/compareseq.png" alt="compareseq" width="700">
+<img src="../images/compareseq.png" alt="compareseq" width="650">
 </div>
-<div class="title">Figure 3. Sequence Diagram for <code>compare</code> Command</div>
+<div class="title">Figure 4. Sequence Diagram for <code>compare</code> Command</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 10) is the sequence diagram when <code>compare</code> is called.</p>
@@ -407,9 +412,9 @@ diagrams</strong> to explain complicated processes in <strong>simpler terms</str
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/compare1.png" alt="compare1" width="700">
+<img src="../images/compare1.png" alt="compare1" width="650">
 </div>
-<div class="title">Figure 4. Example of VersionedProject when <code>edit</code> on Task B</div>
+<div class="title">Figure 5. Example of VersionedProject when <code>edit</code> on Task B</div>
 </div>
 <div class="paragraph">
 <p>Given above (Figure 11.) is an example usage scenario and how the Compare Task mechanism behaves.</p>
@@ -426,9 +431,9 @@ within <code>projectStateList</code> and passed into <code>CompareCommand#Comman
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/compare2.png" alt="compare2" width="700">
+<img src="../images/compare2.png" alt="compare2" width="650">
 </div>
-<div class="title">Figure 5. Process of how <code>compare</code> command will flow</div>
+<div class="title">Figure 6. Process of how <code>compare</code> command will flow</div>
 </div>
 <div class="paragraph">
 <p>Step 4. <code>VersionedProject#compareTask()</code> will iterate through all the the tasks within each project state. The <code>taskId</code>
@@ -454,7 +459,7 @@ that is encountered, "Nothing to compare" will be showed to the user.
 <div class="content">
 <img src="../images/compare%203.png" alt="compare 3" width="400">
 </div>
-<div class="title">Figure 6. A successful <code>compare</code> where name is different</div>
+<div class="title">Figure 7. A successful <code>compare</code> where name is different</div>
 </div>
 <div class="paragraph">
 <p>Step 6. If there is a difference in any of the fields in the comparison (Figure 13), the difference will be showed to the user.
@@ -516,12 +521,12 @@ The list will store <code>0</code> for all other commands.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/taskhistoryseq.png" alt="taskhistoryseq" width="700">
+<img src="../images/taskhistoryseq.png" alt="taskhistoryseq" width="650">
 </div>
-<div class="title">Figure 7. Sequence Diagram for <code>taskhistory</code> Command</div>
+<div class="title">Figure 8. Sequence Diagram for <code>taskhistory</code> Command</div>
 </div>
 <div class="paragraph">
-<p>Given above (Figure 14) is the sequence diagram when <code>taskhistory</code> is called.</p>
+<p>Given above (Figure 17) is the sequence diagram when <code>taskhistory</code> is called.</p>
 </div>
 <div class="paragraph">
 <p>It is facilitated by <code>CommandHistory</code> and implements the following operations:</p>
@@ -556,22 +561,22 @@ to retrieve the command string within <code>userInputHistory</code>. The string 
 <h4 id="behaviour-when-commands-are-executed"><a class="link" href="#behaviour-when-commands-are-executed">Behaviour when commands are executed</a></h4>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="700">
+<img src="../images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="650">
 </div>
-<div class="title">Figure 8. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
+<div class="title">Figure 9. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 15). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
+<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 18). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
 However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="700">
+<img src="../images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="650">
 </div>
-<div class="title">Figure 9. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
+<div class="title">Figure 10. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour when a <code>edit</code> command  is called (Figure 16). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
+<p>Note the behaviour when a <code>edit</code> command  is called (Figure 19). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
 <code>edit</code> command is called on. Observe that positions of previous non-<code>edit</code> command will be filled with <code>0</code>. <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 </div>
@@ -618,4 +623,4 @@ and our <strong>chosen option is Alternative 1</strong></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 08:32:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 09:20:05 UTC</div></div></div></body></html>

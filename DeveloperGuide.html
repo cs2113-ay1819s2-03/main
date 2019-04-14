@@ -983,7 +983,7 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/compareseq.png" alt="compareseq" width="700">
+<img src="images/compareseq.png" alt="compareseq" width="650">
 </div>
 <div class="title">Figure 10. Sequence Diagram for <code>compare</code> Command</div>
 </div>
@@ -995,7 +995,7 @@ The entire project list could be found in <strong><em>./data/projectlist.json</e
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/compare1.png" alt="compare1" width="700">
+<img src="images/compare1.png" alt="compare1" width="650">
 </div>
 <div class="title">Figure 11. Example of VersionedProject when <code>edit</code> on Task B</div>
 </div>
@@ -1014,7 +1014,7 @@ within <code>projectStateList</code> and passed into <code>CompareCommand#Comman
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/compare2.png" alt="compare2" width="700">
+<img src="images/compare2.png" alt="compare2" width="650">
 </div>
 <div class="title">Figure 12. Process of how <code>compare</code> command will flow</div>
 </div>
@@ -1395,12 +1395,12 @@ The list will store <code>0</code> for all other commands.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/taskhistoryseq.png" alt="taskhistoryseq" width="700">
+<img src="images/taskhistoryseq.png" alt="taskhistoryseq" width="650">
 </div>
 <div class="title">Figure 17. Sequence Diagram for <code>taskhistory</code> Command</div>
 </div>
 <div class="paragraph">
-<p>Given above (Figure 14) is the sequence diagram when <code>taskhistory</code> is called.</p>
+<p>Given above (Figure 17) is the sequence diagram when <code>taskhistory</code> is called.</p>
 </div>
 <div class="paragraph">
 <p>It is facilitated by <code>CommandHistory</code> and implements the following operations:</p>
@@ -1435,22 +1435,22 @@ to retrieve the command string within <code>userInputHistory</code>. The string 
 <h4 id="behaviour-when-commands-are-executed"><a class="link" href="#behaviour-when-commands-are-executed">5.8.2. Behaviour when commands are executed</a></h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="700">
+<img src="images/ViewTaskHistorySeq1.png" alt="ViewTaskHistorySeq1" width="650">
 </div>
 <div class="title">Figure 18. Behaviour of userTaskHistoryTaskId during <code>add</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 15). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
+<p>Note the behaviour of useTaskHistoryTaskId when all other commands (<strong>not</strong> <code>edit</code>/<code>completed</code>/<code>addtag</code>/<code>delete</code>) is called (Figure 18). <code>CommandHistory#addHistoryTaskId()</code> will not be called thus <code>userInputHistoryTaskId</code> will not be updated.
 However <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="700">
+<img src="images/ViewTaskHistorySeq2.png" alt="ViewTaskHistorySeq2" width="650">
 </div>
 <div class="title">Figure 19. Behaviour of userTaskHistoryTaskId during <code>edit</code> commands</div>
 </div>
 <div class="paragraph">
-<p>Note the behaviour when a <code>edit</code> command  is called (Figure 16). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
+<p>Note the behaviour when a <code>edit</code> command  is called (Figure 19). <code>CommandHistory#addHistoryTaskId()</code> will be called thus <code>userInputHistoryTaskId</code> will be updated with the taskId of the task where the
 <code>edit</code> command is called on. Observe that positions of previous non-<code>edit</code> command will be filled with <code>0</code>. <code>userInputHistory</code> will still be updated as usual.</p>
 </div>
 </div>
@@ -3015,4 +3015,4 @@ Expected: Results Box displays "&lt;Name of project&gt;: x tasks completed. (Per
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 08:32:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 09:20:05 UTC</div></div></div></body></html>

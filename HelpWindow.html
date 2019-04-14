@@ -65,11 +65,18 @@
 </li>
 </ul>
 </li>
-<li><a href="#faq">7. FAQ</a></li>
-<li><a href="#command-summary">8. Command Summary</a></li>
-<li><a href="#appendix-a">9. Appendix A</a>
+<li><a href="#future-enhancements-coming-in-v2-0">7. Future Enhancements [coming in v2.0]</a>
+<ul class="sectlevel3">
+<li><a href="#analyse-progress-of-all-projects-code-analyse-code-2">7.1. Analyse progress of all projects: <code>analyse</code></a></li>
+<li><a href="#undo-per-task-code-undotask-code">7.2. Undo per task <code>undotask</code></a></li>
+<li><a href="#redo-per-task-code-redotask-code">7.3. Redo per task <code>redotask</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">8. FAQ</a></li>
+<li><a href="#command-summary">9. Command Summary</a></li>
+<li><a href="#appendix-a">10. Appendix A</a>
 <ul class="sectlevel2">
-<li><a href="#samplejson">9.1. Sample JSON file for <code>import</code></a></li>
+<li><a href="#samplejson">10.1. Sample JSON file for <code>import</code></a></li>
 </ul>
 </li>
 </ul>
@@ -165,6 +172,7 @@ This is a note. These are things for you to take note of when using <strong>Note
 <div class="content">
 <img src="images/applayout.png" alt="applayout" width="790">
 </div>
+<div class="title">Figure 1. Application interface</div>
 </div>
 <div class="ulist">
 <ul>
@@ -201,6 +209,7 @@ This is a note. These are things for you to take note of when using <strong>Note
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
 </div>
+<div class="title">Figure 2. Application layout</div>
 </div>
 <div class="paragraph">
 <p>The application has two levels, the project level and the task level, as shown. There are some commands that only works on certain levels. This is covered in detail in Sections 6 and 7. The project level contains all the projects the user has added while the task level contains the tasks of a particular project.</p>
@@ -232,7 +241,7 @@ This is a note. These are things for you to take note of when using <strong>Note
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
 </li>
 <li>
-<p>Type the command in the command box or <strong>Panel A</strong> (refer to Figure 2) and press Enter to execute it.</p>
+<p>Type the command in the command box or <strong>Panel A</strong> (refer to Figure 1) and press Enter to execute it.</p>
 </li>
 <li>
 <p>Some example commands you can try:</p>
@@ -448,7 +457,7 @@ However, group tag created exists for the entire NoteNote instance and will be l
 <div class="content">
 <img src="images/AfterDefineTag.png" alt="AfterDefineTag" width="800">
 </div>
-<div class="title">Figure 1. After excuting <code>definetag</code></div>
+<div class="title">Figure 3. After excuting <code>definetag</code></div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -484,7 +493,7 @@ However, group tag created exists for the entire NoteNote instance and will be l
 <p>Import projects and tasks to your NoteNote instance from project list shared by a friend. New projects and tasks will be added on top of current project list.</p>
 </div>
 <div class="paragraph">
-<p>Source file must be a JSON file and follow a specific format. See <a href="#samplejson">Section 9.1, &#8220;Sample JSON file for <code>import</code>&#8221;</a>.</p>
+<p>Source file must be a JSON file and follow a specific format. See <a href="#samplejson">Section 10.1, &#8220;Sample JSON file for <code>import</code>&#8221;</a>.</p>
 </div>
 <div class="paragraph">
 <p>This feature is recommended to be used together with <code>export</code> so that users need not manually generate a JSON file to <code>import</code>.</p>
@@ -529,7 +538,7 @@ Refer to diagrams below on what NoteNote will display before and after successfu
 <div class="content">
 <img src="images/BeforeImportCommand.png" alt="BeforeImportCommand" width="600">
 </div>
-<div class="title">Figure 2. Before executing <code>import</code></div>
+<div class="title">Figure 4. Before executing <code>import</code></div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -538,7 +547,7 @@ Refer to diagrams below on what NoteNote will display before and after successfu
 <div class="content">
 <img src="images/AfterImportCommand.png" alt="AfterImportCommand" width="600">
 </div>
-<div class="title">Figure 3. After executing <code>import</code></div>
+<div class="title">Figure 5. After executing <code>import</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -605,7 +614,7 @@ Output path should be explicitly specified unless the output is to be within the
 <div class="content">
 <img src="images/AfterExportCommand.png" alt="AfterExportCommand" width="600">
 </div>
-<div class="title">Figure 4. After executing <code>export</code></div>
+<div class="title">Figure 6. After executing <code>export</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -630,7 +639,7 @@ Output path should be explicitly specified unless the output is to be within the
 <div class="content">
 <img src="images/AnalyseOutcome.PNG" alt="AnalyseOutcome" width="600">
 </div>
-<div class="title">Figure 5. Example Outcome for <code>analyse</code> command</div>
+<div class="title">Figure 7. Example Outcome for <code>analyse</code> command</div>
 </div>
 <div class="paragraph">
 <p>Results Box (Panel B) will display number of completed tasks for each project, and percentage of each project completed, as shown in the above figure.</p>
@@ -748,7 +757,7 @@ A task can have any number of tags (including 0).
 <div class="content">
 <img src="images/AfterAddTag.png" alt="AfterAddTag" width="600">
 </div>
-<div class="title">Figure 6. After executing <code>addtag</code></div>
+<div class="title">Figure 8. After executing <code>addtag</code></div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -940,7 +949,7 @@ Tasks matching at least one keyword will be returned (i.e. <code>OR</code> searc
 <div class="content">
 <img src="images/AfterListTag.png" alt="AfterListTag" width="800">
 </div>
-<div class="title">Figure 7. After executing <code>listtag</code></div>
+<div class="title">Figure 9. After executing <code>listtag</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -1032,7 +1041,7 @@ Completed tasks will be used as statistics for the <code>analyse</code> feature,
 <div class="content">
 <img src="images/CompletedOutcome.PNG" alt="CompletedOutcome" width="300">
 </div>
-<div class="title">Figure 8. Example Outcome for <code>completed</code> command</div>
+<div class="title">Figure 10. Example Outcome for <code>completed</code> command</div>
 </div>
 <div class="paragraph">
 <p>Task Box (Panel D) will display a <code>completed</code> tag for the third task, as shown in the above figure.</p>
@@ -1281,11 +1290,11 @@ thus <code>taskhistory</code> will no longer work as intended when you return to
 <div class="content">
 <img src="images/taskhistorysample.png" alt="taskhistorysample" width="900">
 </div>
-<div class="title">Figure 9. Example Outcome for <code>taskhistory</code> command</div>
+<div class="title">Figure 11. Example Outcome for <code>taskhistory</code> command</div>
 </div>
 <div class="paragraph">
 <p>Results Box (Panel B) will display all previous commands which directly
-affects the task at index 1 (Figure 6).</p>
+affects the task at index 1 (Figure 11).</p>
 </div>
 </div>
 <div class="sect3">
@@ -1368,11 +1377,11 @@ If you <code>listproject</code>, the history of commands will be cleared,
 <div class="content">
 <img src="images/comparesample.png" alt="comparesample" width="900">
 </div>
-<div class="title">Figure 10. Example Outcome for <code>compare</code> command</div>
+<div class="title">Figure 12. Example Outcome for <code>compare</code> command</div>
 </div>
 <div class="paragraph">
 <p>Task Box (Panel B) will display information of current version of the task at
-         index 1 ( <em>sample task</em> ) and the previous version of it ( <em>sample task edited</em> ) (Figure 7).
+         index 1 ( <em>sample task</em> ) and the previous version of it ( <em>sample task edited</em> ) (Figure 12).
          Allows you to view a direct comparison of what was changed.</p>
 </div>
 </div>
@@ -1380,7 +1389,99 @@ If you <code>listproject</code>, the history of commands will be cleared,
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">7. FAQ</a></h2>
+<h2 id="future-enhancements-coming-in-v2-0"><a class="link" href="#future-enhancements-coming-in-v2-0">7. Future Enhancements [coming in v2.0]</a></h2>
+<div class="sectionbody">
+<div class="sect3">
+<h4 id="analyse-progress-of-all-projects-code-analyse-code-2"><a class="link" href="#analyse-progress-of-all-projects-code-analyse-code-2">7.1. Analyse progress of all projects: <code>analyse</code></a></h4>
+<div class="paragraph">
+<p>Current <code>analyse</code> feature will show number of completed tasks for each project, and percentage of each project completed.</p>
+</div>
+<div class="paragraph">
+<p>Future enhancement of <code>analyse</code> will be more comprehensive, displaying <strong>visual graphs, charts &amp; tables</strong></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="undo-per-task-code-undotask-code"><a class="link" href="#undo-per-task-code-undotask-code">7.2. Undo per task <code>undotask</code></a></h4>
+<div class="paragraph">
+<p>Current <code>undo</code> feature is a general execution on the overall commands that is executed.</p>
+</div>
+<div class="paragraph">
+<p><code>undotask</code> will allow you to "undo" a command that is executed on the selected task.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>undotask INDEX</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 n/edited_name</code> &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the new edited name.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>undotask 1</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the previous name before the edit.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="redo-per-task-code-redotask-code"><a class="link" href="#redo-per-task-code-redotask-code">7.3. Redo per task <code>redotask</code></a></h4>
+<div class="paragraph">
+<p>Current <code>redo</code> feature is a general execution on the overall undo command that is executed.</p>
+</div>
+<div class="paragraph">
+<p><code>redotask</code> will allow you to "redo" from a <code>undotask</code> that is executed on the selected task.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>redotask INDEX</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>undotask 1</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the previous name before the edit.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>redotask 1</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: Task Box (Panel D) will update the name for the task at index 1 to reflect the name before <code>undotask</code> was executed.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">8. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another computer?<br>
@@ -1402,7 +1503,7 @@ If you <code>listproject</code>, the history of commands will be cleared,
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">8. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">9. Command Summary</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -1511,10 +1612,10 @@ If you <code>listproject</code>, the history of commands will be cleared,
 </div>
 </div>
 <div class="sect1">
-<h2 id="appendix-a"><a class="link" href="#appendix-a">9. Appendix A</a></h2>
+<h2 id="appendix-a"><a class="link" href="#appendix-a">10. Appendix A</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="samplejson"><a class="link" href="#samplejson">9.1. Sample JSON file for <code>import</code></a></h3>
+<h3 id="samplejson"><a class="link" href="#samplejson">10.1. Sample JSON file for <code>import</code></a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code>{
@@ -1550,4 +1651,4 @@ If you <code>listproject</code>, the history of commands will be cleared,
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 08:32:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 09:20:05 UTC</div></div></div></body></html>
